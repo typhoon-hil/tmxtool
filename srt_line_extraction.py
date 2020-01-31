@@ -17,7 +17,7 @@ def create_dicts(lines):
         idx += 1
 
         content = ""
-        while len(lines) > idx and lines[idx].strip() != '\n':
+        while len(lines) > idx and lines[idx].strip() != '':
             content += lines[idx].strip()
             idx += 1
 
