@@ -7,7 +7,7 @@ ERR_CODE_COMMAND_LINE_ARGS = 407
 WARNING_CODE_INVALID_FORMAT = 405
 
 
-def run_error(err_code, err_content, exception=None):
+def run_error(err_code, err_content=None, exception=None):
     if err_code == ERR_CODE_NON_EXISTING_FILE:
         pu.display_message('Error: The file you provided was not found [' + err_content + ']. Script exited.')
         exit(ERR_CODE_NON_EXISTING_FILE)
