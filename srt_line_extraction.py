@@ -18,7 +18,7 @@ def create_dicts(lines):
 
         content = ""
         while len(lines) > idx and lines[idx].strip() != '':
-            content += lines[idx].strip()
+            content += lines[idx]
             idx += 1
 
         if id.strip() == '' or timestamp.strip() == '' or content.strip() == '':
