@@ -3,11 +3,16 @@ import printing_utilities as pu
 ERR_CODE_NON_EXISTING_FILE = 404
 ERR_CODE_CREATING_XML = 406
 ERR_CODE_COMMAND_LINE_ARGS = 407
+ERR_CODE_NON_EXISTING_DIRECTORY = 408
 
 WARNING_CODE_INVALID_FORMAT = 405
+WARNING_CODE_NO_PAIR_FOUND = 406
 
 
 def run_error(err_code, err_content=None, exception=None):
+    if err_code == ERR_CODE_NON_EXISTING_DIRECTORY:
+        pu.display_message('Error: The directory you provided was not found [' + err_content + ']. Script exited.')
+        exit(ERR_CODE_NON_EXISTING_DIRECTORY)
     if err_code == ERR_CODE_NON_EXISTING_FILE:
         pu.display_message('Error: The file you provided was not found [' + err_content + ']. Script exited.')
         exit(ERR_CODE_NON_EXISTING_FILE)
@@ -34,3 +39,6 @@ def run_warning(warn_code, warn_content, exception=None):
         pu.display_message('|---Content: [' + warn_content[2] + ']')
         pu.display_message('Continuing file conversion ...')
         return WARNING_CODE_INVALID_FORMAT
+    if warn_code == WARNING_CODE_NO_PAIR_FOUND:
+        pu.display_message('Warning: no pair found for [' + warn_content + ']')
+        return WARNING_CODE_NO_PAIR_FOUND
