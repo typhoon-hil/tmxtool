@@ -8,7 +8,8 @@ def create_xml_from_dicts(src_dict, src_lang, tr_dict, tr_lang):
     root.set('version', "1.4")
 
     # -- Configure file header
-    # TODO: This could be specified in a .conf file or some-such and then created from that file
+    # TODO: This could be specified in a .conf file or
+    #  some-such and then created from that file
     header = ET.SubElement(root, 'header')
     header.set('creationtool', 'tmxtool')
     header.set('creationtoolversion', '1.0.0')

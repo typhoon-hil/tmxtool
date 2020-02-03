@@ -11,23 +11,28 @@ WARNING_CODE_NO_PAIR_FOUND = 406
 
 def run_error(err_code, err_content=None, exception=None):
     if err_code == ERR_CODE_NON_EXISTING_DIRECTORY:
-        pu.display_message('Error: The directory you provided was not found [' + err_content + ']. Script exited.')
+        pu.display_message('Error: The directory you provided was not found ['
+                           + err_content + ']. Script exited.')
         exit(ERR_CODE_NON_EXISTING_DIRECTORY)
     if err_code == ERR_CODE_NON_EXISTING_FILE:
-        pu.display_message('Error: The file you provided was not found [' + err_content + ']. Script exited.')
+        pu.display_message('Error: The file you provided was not found ['
+                           + err_content + ']. Script exited.')
         exit(ERR_CODE_NON_EXISTING_FILE)
     if err_code == ERR_CODE_CREATING_XML:
         pu.display_message('Error: unable to create file ' + err_content +
-                           '. The reason for this is currently unknown to the system and must be analyzed by hand.')
+                           '. The reason for this is currently unknown to '
+                           'the system and must be analyzed by hand.')
         pu.display_message('Concrete exception:')
         pu.display_message(exception)
         exit(ERR_CODE_CREATING_XML)
     if err_code == ERR_CODE_COMMAND_LINE_ARGS:
         pu.display_message("Invalid number of command arguments.")
         pu.display_message("> Usage: tmxtool.py [source-file-path] "
-                           "[source-language] [translation-file-path] [translation-language]")
+                           "[source-language] [translation-file-path] "
+                           "[translation-language]")
         pu.display_message("> Example:")
-        pu.display_message(">> tmxtool.py C:\\Documents\\src-en.txt en C:\\Documents\\src-de.txt de")
+        pu.display_message(">> tmxtool.py C:\\Documents\\src-en.txt en "
+                           "C:\\Documents\\src-de.txt de")
         exit(ERR_CODE_COMMAND_LINE_ARGS)
 
 

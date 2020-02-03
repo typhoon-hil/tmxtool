@@ -1,4 +1,9 @@
-from error_manager import ERR_CODE_NON_EXISTING_DIRECTORY, WARNING_CODE_NO_PAIR_FOUND, WARNING_CODE_INVALID_FORMAT, run_warning, run_error, ERR_CODE_NON_EXISTING_FILE, ERR_CODE_CREATING_XML, ERR_CODE_COMMAND_LINE_ARGS
+from scripts.ce.pysynch import print_error
+
+from error_manager import ERR_CODE_NON_EXISTING_DIRECTORY, \
+    WARNING_CODE_NO_PAIR_FOUND, WARNING_CODE_INVALID_FORMAT, \
+    run_warning, run_error, ERR_CODE_NON_EXISTING_FILE, \
+    ERR_CODE_CREATING_XML
 from tmx_xml_creator import create_xml_from_dicts
 
 
@@ -75,7 +80,10 @@ def line_extractor_dir(directory_path, src_lang):
         files_to_translate[filename].update(t)
 
     for k, v in files_to_translate.items():
-        if not ('path1' in v and 'lang1' in v and 'path2' in v and 'lang2' in v):
+        if not ('path1' in v and
+                'lang1' in v and
+                'path2' in v and
+                'lang2' in v):
             run_warning(WARNING_CODE_NO_PAIR_FOUND, k)
             continue
         path1 = v['path1']
@@ -96,10 +104,12 @@ def line_extractor_full(path1, lang1, path2, lang2, result_name=None):
     lines_2 = []
 
     # -- Check both files existence and read all content
-    pu.display_message('#1 Searching for files and scanning all lines in files ...')
+    pu.display_message('#1 Searching for files and '
+                       'scanning all lines in files ...')
     lines_1 = get_file_content_safe(path1)
     lines_2 = get_file_content_safe(path2)
-    pu.display_message('#1 ... Files found and all lines in both files were read!\n')
+    pu.display_message('#1 ... Files found and all lines '
+                       'in both files were read!\n')
 
     # -- Create dictionaries from all scanned lines in files
     pu.display_message('#2 Creating dictionaries from scanned lines ...')
@@ -114,7 +124,8 @@ def line_extractor_full(path1, lang1, path2, lang2, result_name=None):
         xml_filename = str(time.time()) + '.tmx'
     else:
         xml_filename = result_name
-    xml_directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'output')
+    xml_directory = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                 'output')
     full_file_path = os.path.join(xml_directory, xml_filename)
     pu.display_message("File will be generated in: [" + full_file_path + "]")
     # -- Create root
