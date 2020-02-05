@@ -1,5 +1,3 @@
-from scripts.ce.pysynch import print_error
-
 from error_manager import ERR_CODE_NON_EXISTING_DIRECTORY, \
     WARNING_CODE_NO_PAIR_FOUND, WARNING_CODE_INVALID_FORMAT, \
     run_warning, run_error, ERR_CODE_NON_EXISTING_FILE, \
@@ -55,7 +53,7 @@ def create_dicts(lines):
 def line_extractor_dir(directory_path, src_lang):
     src_lang = src_lang.lower()
     if not os.path.exists(directory_path):
-        print_error(ERR_CODE_NON_EXISTING_DIRECTORY, directory_path)
+        run_error(ERR_CODE_NON_EXISTING_DIRECTORY, directory_path)
 
     files_to_translate = {}
     # -- filename - {source-file, source-lang, trans-file, trans-lang}
