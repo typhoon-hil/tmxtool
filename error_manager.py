@@ -23,12 +23,9 @@ def run_error(err_code, err_content=None, exception=None):
         exit(ERR_CODE_CREATING_XML)
     if err_code == ERR_CODE_COMMAND_LINE_ARGS:
         pu.display_message("Invalid number of command arguments.")
-        pu.display_message("> Usage: tmxtool.py [source-file-path] "
-                           "[source-language] [translation-file-path] "
-                           "[translation-language]")
-        pu.display_message("> Example:")
-        pu.display_message(">> tmxtool.py C:\\Documents\\src-en.txt en "
-                           "C:\\Documents\\src-de.txt de")
+        pu.display_message("> Usage: tmxtool.py (command-name) "
+                           "[command-params]")
+        pu.display_message("> Type: 'tmxtool.py -help' for more information.")
         exit(ERR_CODE_COMMAND_LINE_ARGS)
 
 
