@@ -4,6 +4,16 @@ import help_script
 import srt_line_extraction
 from error_manager import run_error
 
+import re
+
+
+def sandbox(arguments):
+    print("sandbox")
+    check_string = "00:12:44,412"
+    pattern = "[0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3}"
+    p = re.compile(pattern)
+    m = p.match(check_string)
+    print(m)
 
 def parse_command_line_args(command_line_args):
     if len(command_line_args) < constants.COMMAND_LINE_MIN_ARGS:
@@ -17,6 +27,7 @@ def parse_command_line_args(command_line_args):
         help_script.print_usage_and_switches()
     elif command_name == constants.COMMAND_NAME_CREATE_TMX:
         srt_line_extraction.line_extractor_full(command_line_args[2:])
-
+    elif command_name == constants.COMMAND_NAME_DEV:
+        sandbox(command_line_args[2:])
     else:
         run_error(constants.ERR_CODE_COMMAND_LINE_ARGS)
