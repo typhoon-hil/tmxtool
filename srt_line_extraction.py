@@ -1,7 +1,7 @@
-from error_manager import ERR_CODE_NON_EXISTING_DIRECTORY, \
-    WARNING_CODE_NO_PAIR_FOUND, WARNING_CODE_INVALID_FORMAT, \
-    run_warning, run_error, ERR_CODE_NON_EXISTING_FILE, \
-    ERR_CODE_CREATING_XML
+from CONSTANTS import ERR_CODE_COMMAND_LINE_ARGS, ERR_CODE_NON_EXISTING_FILE, \
+    WARNING_CODE_INVALID_FORMAT, ERR_CODE_NON_EXISTING_DIRECTORY, \
+    WARNING_CODE_NO_PAIR_FOUND, ERR_CODE_CREATING_XML
+from error_manager import run_warning, run_error
 from tmx_xml_creator import create_xml_from_dicts
 
 
@@ -10,17 +10,17 @@ import time
 import os
 
 
-def get_file_content_safe(path):
+def _get_file_content_safe(path):
     try:
         with open(path) as file:
             # -- process everything for file 1
             lines = file.readlines()
-    except FileNotFoundError as e:
+    except FileNotFoundError:
         run_error(ERR_CODE_NON_EXISTING_FILE, path)
     return lines
 
 
-def create_dicts(lines):
+def _create_dicts(lines):
     ret = {}
 
     idx = 0
@@ -29,7 +29,7 @@ def create_dicts(lines):
             idx += 1
             continue
 
-        id = lines[idx].strip()
+        local_id = lines[idx].strip()
         idx += 1
 
         timestamp = lines[idx].strip()
@@ -40,17 +40,19 @@ def create_dicts(lines):
             content += lines[idx]
             idx += 1
 
-        if id.strip() == '' or timestamp.strip() == '' or content.strip() == '':
-            run_warning(WARNING_CODE_INVALID_FORMAT, [id, timestamp, content])
+        if local_id.strip() == '' or timestamp.strip() == '' or \
+                content.strip() == '':
+            run_warning(WARNING_CODE_INVALID_FORMAT,
+                        [local_id, timestamp, content])
             continue
 
-        ret[timestamp] = (id, content)
+        ret[timestamp] = (local_id, content)
         idx += 1
 
     return ret
 
 
-def line_extractor_dir(directory_path, src_lang):
+def _line_extractor_dir(directory_path, src_lang):
     src_lang = src_lang.lower()
     if not os.path.exists(directory_path):
         run_error(ERR_CODE_NON_EXISTING_DIRECTORY, directory_path)
@@ -87,31 +89,35 @@ def line_extractor_dir(directory_path, src_lang):
         lang1 = v['lang1']
         path2 = v['path2']
         lang2 = v['lang2']
-        line_extractor_full(path1, lang1, path2, lang2, k + ".tmx")
+        _line_extractor_full(path1, lang1, path2, lang2, str(k) + ".tmx")
 
 
-def line_extractor_full(path1, lang1, path2, lang2, result_name=None):
-    # -- Creates a file in output directory based on result_name, 
-    # -- or generates a timestamp as the name if None provided
-    # -- Pull system arguments and create vars
-    dict_1 = {}
-    lines_1 = []
+def line_extractor_full(arguments):
+    if arguments is None or (len(arguments) != 4 and len(arguments) != 2):
+        run_error(ERR_CODE_COMMAND_LINE_ARGS)
 
-    dict_2 = {}
-    lines_2 = []
+    if len(arguments) == 4:
+        _line_extractor_full(arguments[0],
+                             arguments[1],
+                             arguments[2],
+                             arguments[3])
+    else:
+        _line_extractor_dir(arguments[0], arguments[1])
 
+
+def _line_extractor_full(path1, lang1, path2, lang2, result_name=None):
     # -- Check both files existence and read all content
     pu.display_message('#1 Searching for files and '
                        'scanning all lines in files ...')
-    lines_1 = get_file_content_safe(path1)
-    lines_2 = get_file_content_safe(path2)
+    lines_1 = _get_file_content_safe(path1)
+    lines_2 = _get_file_content_safe(path2)
     pu.display_message('#1 ... Files found and all lines '
                        'in both files were read!\n')
 
     # -- Create dictionaries from all scanned lines in files
     pu.display_message('#2 Creating dictionaries from scanned lines ...')
-    dict_1 = create_dicts(lines_1)
-    dict_2 = create_dicts(lines_2)
+    dict_1 = _create_dicts(lines_1)
+    dict_2 = _create_dicts(lines_2)
     pu.display_message('#2 ... Created dictionaries from scanned lines!\n')
 
     # -- Create xml file
