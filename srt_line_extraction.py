@@ -12,7 +12,6 @@ import time
 import os
 
 
-
 def get_file_content_safe(path):
     try:
         with open(path) as file:
