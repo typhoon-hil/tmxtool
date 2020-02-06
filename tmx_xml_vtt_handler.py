@@ -15,7 +15,6 @@ def _format_time(time_string):
     return result[0] + "." + result[1] + " --> " + result[2] + "." + result[3]
 
 
-
 def create_xml_from_dicts(src_dict, src_lang, tr_dict, tr_lang):
     # -- Create root
     root = ET.Element('tmx')
@@ -65,25 +64,21 @@ def create_vtt_from_tmx(path_to_tmx, target_language):
     text_items = []
     for child in root.iter('tuv'):
         if target_language in child.attrib.values():
-            print(child[0].text)
             text_items.append(
                 tuple([item for item in child[0].text.split('\n')
                        if len(item.strip()) != 0]))
 
-    vtt_document = "WEBVTT\n"
+    vtt_document_text = "WEBVTT\n"
 
     for item_tuple in text_items:
         # -- Get and process the time from the tuple
         # (it will always be on first place)
         time = _format_time(item_tuple[0])
-
         # -- Configure alignment text
         alignment_text = " align:middle line:" + \
                          ("84%" if len(item_tuple[1:]) > 1 else "90%") + "\n"
-
         # -- Configure rest of text
         rest_of_text = "\n".join([text.strip() for text in item_tuple[1:]])
+        vtt_document_text += "\n" + time + alignment_text + rest_of_text + "\n"
 
-        vtt_document += "\n" + time + alignment_text + rest_of_text + "\n"
-
-    print(vtt_document)
+    return vtt_document_text

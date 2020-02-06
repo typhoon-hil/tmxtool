@@ -2,22 +2,14 @@ from CONSTANTS import ERR_CODE_COMMAND_LINE_ARGS, ERR_CODE_NON_EXISTING_FILE, \
     WARNING_CODE_INVALID_FORMAT, ERR_CODE_NON_EXISTING_DIRECTORY, \
     WARNING_CODE_NO_PAIR_FOUND, ERR_CODE_CREATING_XML
 from error_manager import run_warning, run_error
+from file_handler import get_file_content_safe, get_output_directory, \
+    get_output_file_name
 from tmx_xml_vtt_handler import create_xml_from_dicts
 
 
 import printing_utilities as pu
 import time
 import os
-
-
-def _get_file_content_safe(path):
-    try:
-        with open(path) as file:
-            # -- process everything for file 1
-            lines = file.readlines()
-    except FileNotFoundError:
-        run_error(ERR_CODE_NON_EXISTING_FILE, path)
-    return lines
 
 
 def _create_dicts(lines):
@@ -109,8 +101,8 @@ def _line_extractor_full(path1, lang1, path2, lang2, result_name=None):
     # -- Check both files existence and read all content
     pu.display_message('#1 Searching for files and '
                        'scanning all lines in files ...')
-    lines_1 = _get_file_content_safe(path1)
-    lines_2 = _get_file_content_safe(path2)
+    lines_1 = get_file_content_safe(path1)
+    lines_2 = get_file_content_safe(path2)
     pu.display_message('#1 ... Files found and all lines '
                        'in both files were read!\n')
 
@@ -127,15 +119,11 @@ def _line_extractor_full(path1, lang1, path2, lang2, result_name=None):
         xml_filename = str(time.time()) + '.tmx'
     else:
         xml_filename = result_name
-    xml_directory = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                 'output')
-    full_file_path = os.path.join(xml_directory, xml_filename)
+    full_file_path = get_output_file_name(xml_filename)
     pu.display_message("File will be generated in: [" + full_file_path + "]")
     # -- Create root
     xml_string = create_xml_from_dicts(dict_1, lang1, dict_2, lang2)
     try:
-        if not os.path.exists(xml_directory):
-            os.mkdir(xml_directory)
         with open(full_file_path, mode='w') as result_file:
             result_file.write(xml_string)
     except Exception as e:
