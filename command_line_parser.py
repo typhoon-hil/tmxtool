@@ -9,11 +9,15 @@ import re
 
 def sandbox(arguments):
     print("sandbox")
-    check_string = "00:12:44,412"
-    pattern = "[0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3}"
-    p = re.compile(pattern)
-    m = p.match(check_string)
-    print(m)
+    check_string = "00:12:44,412 --> 00:12:47,334"
+    number_pattern = "([0-9]{2}:[0-9]{2}:[0-9]{2}),([0-9]{3})"
+    pattern = number_pattern + " --> " + number_pattern
+    # p = re.compile(pattern)
+    # m = p.match(check_string)
+    # print(m)
+    x = re.split(pattern, check_string)
+    print(x)
+
 
 def parse_command_line_args(command_line_args):
     if len(command_line_args) < constants.COMMAND_LINE_MIN_ARGS:
