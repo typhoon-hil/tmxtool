@@ -1,6 +1,6 @@
 from CONSTANTS import ERR_CODE_COMMAND_LINE_ARGS, ERR_CODE_NON_EXISTING_FILE, \
     WARNING_CODE_INVALID_FORMAT, ERR_CODE_NON_EXISTING_DIRECTORY, \
-    WARNING_CODE_NO_PAIR_FOUND, ERR_CODE_CREATING_XML
+    WARNING_CODE_NO_PAIR_FOUND, ERR_CODE_CREATING_XML, TMX_MIN_ARGS
 from error_manager import run_warning, run_error
 from file_handler import get_file_content_safe, get_output_directory, \
     get_output_file_name
@@ -140,7 +140,7 @@ def process_srt(arguments):
         2 args. The arguments can be seen in the help_script section of the
         project.
     """
-    if arguments is None or (len(arguments) != 4 and len(arguments) != 2):
+    if arguments is None or len(arguments) not in TMX_MIN_ARGS:
         run_error(ERR_CODE_COMMAND_LINE_ARGS)
 
     if len(arguments) == 4:

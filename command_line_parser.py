@@ -2,6 +2,7 @@
 import CONSTANTS as constants
 import help_script
 import srt_processor
+import tmx_processor
 from error_manager import run_error
 
 import re
@@ -44,6 +45,8 @@ def parse_command_line_args(command_line_args):
         help_script.print_usage_and_switches()
     elif command_name == constants.COMMAND_NAME_CREATE_TMX:
         srt_processor.process_srt(command_line_args[2:])
+    elif command_name == constants.COMMAND_NAME_CREATE_VTT:
+        tmx_processor.process_tmx_file(command_line_args[2:])
     elif command_name == constants.COMMAND_NAME_DEV:
         sandbox(command_line_args[2:])
     else:

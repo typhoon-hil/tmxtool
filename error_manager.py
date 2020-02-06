@@ -2,7 +2,7 @@ import printing_utilities as pu
 from CONSTANTS import ERR_CODE_NON_EXISTING_DIRECTORY, \
     ERR_CODE_NON_EXISTING_FILE, ERR_CODE_CREATING_XML, \
     ERR_CODE_COMMAND_LINE_ARGS, WARNING_CODE_INVALID_FORMAT, \
-    WARNING_CODE_NO_PAIR_FOUND
+    WARNING_CODE_NO_PAIR_FOUND, ERR_CODE_NON_EXISTING_W_E
 
 
 def run_error(err_code, err_content=None, exception=None):
@@ -38,6 +38,10 @@ def run_error(err_code, err_content=None, exception=None):
                            "[command-params]")
         pu.display_message("> Type: 'tmxtool.py -help' for more information.")
         exit(ERR_CODE_COMMAND_LINE_ARGS)
+    if err_code == ERR_CODE_NON_EXISTING_W_E:
+        pu.display_message("Invalid path. Try another path and make sure it "
+                           "exists and is written correctly.")
+        exit(ERR_CODE_NON_EXISTING_W_E)
 
 
 def run_warning(warn_code, warn_content, exception=None):
