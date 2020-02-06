@@ -1,0 +1,130 @@
+WEBVTT
+
+00:00:00.499 --> 00:00:03.130 align:middle line:90%
+Dieses Kursmodul befasst sich mit dem Entwurf und dem Testen
+
+00:00:03.130 --> 00:00:05.680 align:middle line:90%
+von Synchronisationsalgorithmen für dreiphasige
+
+00:00:05.680 --> 00:00:07.600 align:middle line:90%
+netzgebundene Umrichter.
+
+00:00:07.600 --> 00:00:10.600 align:middle line:90%
+Der Synchronisationsalgorithmus gibt eine Schätzung
+
+00:00:10.600 --> 00:00:14.380 align:middle line:90%
+von der Winkelposition und Frequenz des Netzspannungsvektors
+
+00:00:14.380 --> 00:00:16.600 align:middle line:90%
+durch die gemessenen Netzspannungen.
+
+00:00:16.600 --> 00:00:19.180 align:middle line:90%
+Es gibt viele Synchronisationsalgorithmen,
+
+00:00:19.180 --> 00:00:22.720 align:middle line:90%
+wie zum Beispiel die synchrone PLL Frequenzreferenz,
+
+00:00:22.720 --> 00:00:27.730 align:middle line:90%
+oder kurz PLL, der erweiterte PLL,
+
+00:00:27.730 --> 00:00:30.220 align:middle line:90%
+die generalisierte integratorbasierte Phase zweiter Ordnung
+
+00:00:30.220 --> 00:00:35.050 align:middle line:90%
+und der Phase Locked Loop, die Nulldurchgangserkennung,
+
+00:00:35.050 --> 00:00:39.970 align:middle line:90%
+die diskrete Fourier-Transformation, der Kalman-Filter u.a.
+
+00:00:39.970 --> 00:00:43.120 align:middle line:90%
+Dieses Kursmodul befasst sich mit der synchronen
+
+00:00:43.120 --> 00:00:43.960 align:middle line:90%
+PLL Frequenzreferenz.
+
+00:00:43.960 --> 00:00:47.150 align:middle line:90%
+Um ein PLL-Designbeispiel durchzuführen,
+
+00:00:47.150 --> 00:00:50.950 align:middle line:90%
+nehmen wir an, dass ein 100 Kilowatt- dreiphasiger Wechselrichter
+
+00:00:50.950 --> 00:00:58.060 align:middle line:90%
+an ein 380-Volt-60-Hertz-Netz gemäß UL1741SA angeschlossen ist.
+
+00:00:58.060 --> 00:01:01.520 align:middle line:90%
+Zur Charakterisierung des PLL-Verhaltens
+
+00:01:01.520 --> 00:01:05.970 align:middle line:90%
+definieren wir zusätzlich Leistungszahlen im stationären und transienten Zustand.
+
+00:01:05.970 --> 00:01:08.270 align:middle line:90%
+Für den stationären Zustand sind die Frequenz und der Schätzfehler
+
+00:01:08.270 --> 00:01:11.840 align:middle line:90%
+der Winkelposition, die Welligkeit der Frequenz
+
+00:01:11.840 --> 00:01:14.270 align:middle line:90%
+und THD des Sinus des Schätzfehlers
+
+00:01:14.270 --> 00:01:17.330 align:middle line:90%
+im Normalbetrieb und bei Fehlerverhalten
+
+00:01:17.330 --> 00:01:20.600 align:middle line:90%
+die berücksichtigten Leistungszahlen.
+
+00:01:20.600 --> 00:01:22.610 align:middle line:90%
+Andererseits, um das Verhalten im transienten Zustand
+
+00:01:22.610 --> 00:01:26.750 align:middle line:90%
+zu charakterisieren, wurden die Einschwingzeit und das Über- und Unterschwingen
+
+00:01:26.750 --> 00:01:31.010 align:middle line:90%
+der geschätzten Frequenz aufgrund der Netztransiente
+
+00:01:31.010 --> 00:01:32.090 align:middle line:90%
+in Betracht gezogen.
+
+00:01:32.090 --> 00:01:35.090 align:middle line:90%
+Zur Veranschaulichung der Auswirkungen der Netzstörung
+
+00:01:35.090 --> 00:01:39.320 align:middle line:90%
+auf das Verhalten des PLL, führen wir eine Typhoon HIL-Simulation durch.
+
+00:01:42.550 --> 00:01:44.920 align:middle line:90%
+Unter symmetrischen Betriebsbedingungen
+
+00:01:44.920 --> 00:01:47.440 align:middle line:90%
+ist das stationäre Verhalten zufriedenstellend.
+
+00:01:51.130 --> 00:01:54.650 align:middle line:90%
+Allerdings wird hier unter unsymmetrischen Bedingungen simuliert,
+
+00:01:54.650 --> 00:01:58.670 align:middle line:90%
+nämlich durch das Einstellen der Spannung der Phase B auf 22 Volt,
+
+00:01:58.670 --> 00:02:00.320 align:middle line:90%
+sodass es erhebliche Verzerrungen
+
+00:02:00.320 --> 00:02:03.740 align:middle line:90%
+der geschätzten Größen gibt.
+
+00:02:03.740 --> 00:02:05.390 align:middle line:90%
+Am Ende dieses Moduls sollten Sie
+
+00:02:05.390 --> 00:02:09.740 align:middle line:90%
+in der Lage sein, das Netz und jene Hauptstörungen zu charakterisieren,
+
+00:02:09.740 --> 00:02:15.260 align:middle line:90%
+die sich auf das Verhalten des PLLs auswirken, ein dynamisches Modell für PLLs abzuleiten, das
+
+00:02:15.260 --> 00:02:18.290 align:middle line:90%
+für dessen Verständnis nützlich ist, sowie für die Auswahl von
+
+00:02:18.290 --> 00:02:22.940 align:middle line:90%
+dessen Parametern, einen PLL für netzgekoppelte Wechselrichter zu entwerfen,
+
+00:02:22.940 --> 00:02:26.960 align:middle line:90%
+und durch das Verwenden eines Typhoon HIL-Tools einen testbasierten Ansatz anzuwenden,
+
+00:02:26.960 --> 00:02:29.291 align:middle line:90%
+um PLLs zu bewerten.
