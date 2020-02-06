@@ -32,7 +32,7 @@ def parse_command_line_args(command_line_args):
     if command_name == constants.COMMAND_NAME_HELP:
         help_script.print_usage_and_switches()
     elif command_name == constants.COMMAND_NAME_CREATE_TMX:
-        srt_processor.line_extractor_full(command_line_args[2:])
+        srt_processor.process_srt(command_line_args[2:])
     elif command_name == constants.COMMAND_NAME_DEV:
         sandbox(command_line_args[2:])
     else:

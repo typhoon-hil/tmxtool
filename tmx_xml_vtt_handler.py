@@ -15,14 +15,21 @@ def _format_time(time_string):
     return result[0] + "." + result[1] + " --> " + result[2] + "." + result[3]
 
 
-def create_xml_from_dicts(src_dict, src_lang, tr_dict, tr_lang):
+def create_tmx_from_dicts(src_dict, src_lang, tr_dict, tr_lang):
+    """
+    Creates tmx file using the formatted dictionaries.
+
+    Arguments:
+        src_dict: Dictionary containing source .srt file items
+        src_lang: Source .srt file language
+        tr_dict: Dictionary containing translation .srt file items
+        tr_lang: Translation .srt file language
+    """
     # -- Create root
     root = ET.Element('tmx')
     root.set('version', "1.4")
 
     # -- Configure file header
-    # TODO: This could be specified in a .conf file or
-    #  some-such and then created from that file
     header = ET.SubElement(root, 'header')
     header.set('creationtool', 'tmxtool')
     header.set('creationtoolversion', '1.0.0')
@@ -49,8 +56,8 @@ def create_xml_from_dicts(src_dict, src_lang, tr_dict, tr_lang):
         seg_tr.text = '\n' + key + '\n' + tr_dict[key][1] + '\n'
 
     dom = ET.tostring(root, encoding='unicode', method='xml')
-    # -- Before returning, remove the first line of the string
     tempstring = xml.dom.minidom.parseString(dom).toprettyxml()
+    # -- Before returning, remove the first line of the string
     # tempstring = tempstring.split('\n', 1)[1]
     return tempstring
 
