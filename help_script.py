@@ -3,6 +3,15 @@ import printing_utilities as pu
 
 
 def print_usage_and_switches():
+    """
+    Prints the help text for the user.
+
+    Arguments:
+        None
+
+    Returns:
+        None
+    """
     pu.display_message(" < Typhoon HIL Tmx Tool >")
     pu.display_message(" > Usage:")
     pu.display_message(" > pyton tmxtool.py (command-name) "
