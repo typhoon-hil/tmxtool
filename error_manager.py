@@ -2,7 +2,8 @@ import printing_utilities as pu
 from CONSTANTS import ERR_CODE_NON_EXISTING_DIRECTORY, \
     ERR_CODE_NON_EXISTING_FILE, ERR_CODE_CREATING_XML, \
     ERR_CODE_COMMAND_LINE_ARGS, WARNING_CODE_INVALID_FORMAT, \
-    WARNING_CODE_NO_PAIR_FOUND, ERR_CODE_NON_EXISTING_W_E
+    WARNING_CODE_NO_PAIR_FOUND, ERR_CODE_NON_EXISTING_W_E, \
+    WARNING_NOT_A_TMX_FILE
 
 
 def run_error(err_code, err_content=None, exception=None):
@@ -60,6 +61,12 @@ def run_warning(warn_code, warn_content, exception=None):
         pu.display_message('|---Timestamp: [' + warn_content[1] + ']')
         pu.display_message('|---Content: [' + warn_content[2] + ']')
         pu.display_message('Continuing file conversion ...')
+        return WARNING_CODE_INVALID_FORMAT
+    if warn_code == WARNING_NOT_A_TMX_FILE:
+        pu.display_message('Warning: invalid tmx file.')
+        pu.display_message('The file [' + warn_content + '] you specified '
+                                                         'is not a valid .tmx'
+                                                         ' file.')
         return WARNING_CODE_INVALID_FORMAT
     if warn_code == WARNING_CODE_NO_PAIR_FOUND:
         pu.display_message('Warning: no pair found for [' + warn_content + ']')

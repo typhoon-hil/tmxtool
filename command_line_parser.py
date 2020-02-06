@@ -23,7 +23,7 @@ def sandbox(arguments):
     # print(m)
     x = re.split(pattern, check_string)
     create_vtt_from_tmx(r"C:\REPOS\tmxtool\supporting_documents\
-    1.0 Video Introduction.tmx", 'de')
+    1.0 Video Introduction-01.tmx", 'de')
 
 
 def parse_command_line_args(command_line_args):

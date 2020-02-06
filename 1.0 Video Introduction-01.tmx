@@ -1,0 +1,732 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tmx version="1.4">
+	<header adminlang="en-de" creationtool="tmxtool" creationtoolversion="1.0.0" datatype="PlainText" o-tmf=".srt" segtype="phrase" srclang="en"/>
+	<body>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:00:00,499 --&gt; 00:00:03.130
+This course module
+addresses design and test
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:00:00,499 --&gt; 00:00:03.130
+Dieses Kursmodul befasst sich mit dem Entwurf und dem Testen
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:00:03,130 --&gt; 00:00:05.680
+of synchronization
+algorithms for three phase
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:00:03,130 --&gt; 00:00:05.680
+von Synchronisationsalgorithmen für dreiphasige
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:00:05,680 --&gt; 00:00:07.600
+grid-tied converters.
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:00:05,680 --&gt; 00:00:07.600
+netzgebundene Umrichter.
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:00:07,600 --&gt; 00:00:10.600
+The synchronization
+algorithm gives an estimation
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:00:07,600 --&gt; 00:00:10.600
+Der Synchronisationsalgorithmus gibt eine Schätzung
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:00:10,600 --&gt; 00:00:14.380
+of the grid voltage vector
+angular position and frequency
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:00:10,600 --&gt; 00:00:14.380
+von der Winkelposition und Frequenz des Netzspannungsvektors
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:00:14,380 --&gt; 00:00:16.600
+through the measured
+grid voltages.
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:00:14,380 --&gt; 00:00:16.600
+durch die gemessenen Netzspannungen.
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:00:16,600 --&gt; 00:00:19.180
+There are many
+synchronization algorithms,
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:00:16,600 --&gt; 00:00:19.180
+Es gibt viele Synchronisationsalgorithmen,
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:00:19,180 --&gt; 00:00:22.720
+such as synchronous reference
+frame phase locked loop,
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:00:19,180 --&gt; 00:00:22.720
+wie zum Beispiel die synchrone PLL Frequenzreferenz,
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:00:22,720 --&gt; 00:00:27.730
+or PLL for short,
+enhanced PLL, second order
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:00:22,720 --&gt; 00:00:27.730
+oder kurz PLL, der erweiterte PLL, 
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:00:27,730 --&gt; 00:00:30.220
+generalized
+integrator-based phase
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:00:27,730 --&gt; 00:00:30.220
+die generalisierte integratorbasierte Phase zweiter Ordnung 
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:00:30,220 --&gt; 00:00:35.050
+and frequency-locked loop,
+zero crossing detection,
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:00:30,220 --&gt; 00:00:35.050
+und der Phase Locked Loop, die Nulldurchgangserkennung,
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:00:35,050 --&gt; 00:00:39.970
+discrete Fourier transform,
+Kalman filter, among others.
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:00:35,050 --&gt; 00:00:39.970
+die diskrete Fourier-Transformation, der Kalman-Filter u.a.
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:00:39,970 --&gt; 00:00:43.120
+This course module will address
+the synchronous reference frame
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:00:39,970 --&gt; 00:00:43.120
+Dieses Kursmodul befasst sich mit der synchronen 
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:00:43,120 --&gt; 00:00:43.960
+PLL.
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:00:43,120 --&gt; 00:00:43.960
+PLL Frequenzreferenz.
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:00:43,960 --&gt; 00:00:47.150
+To carry out a PLL
+design example,
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:00:43,960 --&gt; 00:00:47.150
+Um ein PLL-Designbeispiel durchzuführen,
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:00:47,150 --&gt; 00:00:50.950
+let us consider 100 kilowatt
+3-phase inverter connected
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:00:47,150 --&gt; 00:00:50.950
+nehmen wir an, dass ein 100 Kilowatt- dreiphasiger Wechselrichter 
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:00:50,950 --&gt; 00:00:58.060
+to a 380 volt 60 Hertz grid
+compliant with UL1741SA.
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:00:50,950 --&gt; 00:00:58.060
+an ein 380-Volt-60-Hertz-Netz gemäß UL1741SA angeschlossen ist.
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:00:58,060 --&gt; 00:01:01.520
+In addition, to characterize
+the PLL behavior,
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:00:58,060 --&gt; 00:01:01.520
+Zur Charakterisierung des PLL-Verhaltens
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:01:01,520 --&gt; 00:01:05.970
+let us define steady-state and
+transient figures of merit.
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:01:01,520 --&gt; 00:01:05.970
+definieren wir zusätzlich Leistungszahlen im stationären und transienten Zustand.
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:01:05,970 --&gt; 00:01:08.270
+For steady-state,
+frequency and angular
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:01:05,970 --&gt; 00:01:08.270
+Für den stationären Zustand sind die Frequenz und der Schätzfehler
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:01:08,270 --&gt; 00:01:11.840
+position estimation
+error, frequency ripple,
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:01:08,270 --&gt; 00:01:11.840
+der Winkelposition, die Welligkeit der Frequenz 
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:01:11,840 --&gt; 00:01:14.270
+and THD of the sine
+of the estimation
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:01:11,840 --&gt; 00:01:14.270
+und THD des Sinus des Schätzfehlers
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:01:14,270 --&gt; 00:01:17.330
+error under normal
+and fault operations
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:01:14,270 --&gt; 00:01:17.330
+im Normalbetrieb und bei Fehlerverhalten
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:01:17,330 --&gt; 00:01:20.600
+are the considered
+figures of merit.
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:01:17,330 --&gt; 00:01:20.600
+die berücksichtigten Leistungszahlen.
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:01:20,600 --&gt; 00:01:22.610
+On the other hand,
+to characterize
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:01:20,600 --&gt; 00:01:22.610
+Andererseits, um das Verhalten im transienten Zustand
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:01:22,610 --&gt; 00:01:26.750
+the transient behavior, settling
+time and over and undershoot
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:01:22,610 --&gt; 00:01:26.750
+zu charakterisieren, wurden die Einschwingzeit und das Über- und Unterschwingen
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:01:26,750 --&gt; 00:01:31.010
+of the estimated frequency
+due to transit on the grid
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:01:26,750 --&gt; 00:01:31.010
+der geschätzten Frequenz aufgrund der Netztransiente
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:01:31,010 --&gt; 00:01:32.090
+have been considered.
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:01:31,010 --&gt; 00:01:32.090
+in Betracht gezogen.
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:01:32,090 --&gt; 00:01:35.090
+In order to illustrate the
+impact of the grid disturbance
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:01:32,090 --&gt; 00:01:35.090
+Zur Veranschaulichung der Auswirkungen der Netzstörung
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:01:35,090 --&gt; 00:01:39.320
+on the PLL performance, let's
+run a Typhoon HIL simulation.
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:01:35,090 --&gt; 00:01:39.320
+auf das Verhalten des PLL, führen wir eine Typhoon HIL-Simulation durch.
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:01:42,550 --&gt; 00:01:44.920
+Under balanced
+operating condition,
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:01:42,550 --&gt; 00:01:44.920
+Unter symmetrischen Betriebsbedingungen
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:01:44,920 --&gt; 00:01:47.440
+the steady-state
+performance is satisfactory.
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:01:44,920 --&gt; 00:01:47.440
+ist das stationäre Verhalten zufriedenstellend.
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:01:51,130 --&gt; 00:01:54.650
+However, under unbalanced
+condition simulated here
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:01:51,130 --&gt; 00:01:54.650
+Allerdings wird hier unter unsymmetrischen Bedingungen simuliert,
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:01:54,650 --&gt; 00:01:58.670
+by setting the voltage
+of phase B to 22 volts,
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:01:54,650 --&gt; 00:01:58.670
+nämlich durch das Einstellen der Spannung der Phase B auf 22 Volt,
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:01:58,670 --&gt; 00:02:00.320
+there are considerable
+distortions
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:01:58,670 --&gt; 00:02:00.320
+sodass es erhebliche Verzerrungen
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:02:00,320 --&gt; 00:02:03.740
+on the estimated quantities.
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:02:00,320 --&gt; 00:02:03.740
+der geschätzten Größen gibt.
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:02:03,740 --&gt; 00:02:05.390
+By the end of this
+module, you should
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:02:03,740 --&gt; 00:02:05.390
+Am Ende dieses Moduls sollten Sie
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:02:05,390 --&gt; 00:02:09.740
+be able to characterize the
+grid and this main disturbances
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:02:05,390 --&gt; 00:02:09.740
+in der Lage sein, das Netz und jene Hauptstörungen zu charakterisieren,
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:02:09,740 --&gt; 00:02:15.260
+that affect PLL behavior, derive
+a dynamic model for PLLs that
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:02:09,740 --&gt; 00:02:15.260
+die sich auf das Verhalten des PLLs auswirken, ein dynamisches Modell für PLLs abzuleiten, das
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:02:15,260 --&gt; 00:02:18.290
+is useful for its understanding,
+as well as for selecting
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:02:15,260 --&gt; 00:02:18.290
+für dessen Verständnis nützlich ist, sowie für die Auswahl von
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:02:18,290 --&gt; 00:02:22.940
+its parameters, design a
+PLL for grid-tied inverters,
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:02:18,290 --&gt; 00:02:22.940
+dessen Parametern, einen PLL für netzgekoppelte Wechselrichter zu entwerfen,
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:02:22,940 --&gt; 00:02:26.960
+and using a Typhoon HIL tool,
+employ a test-driven approach
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:02:22,940 --&gt; 00:02:26.960
+und durch das Verwenden eines Typhoon HIL-Tools einen testbasierten Ansatz anzuwenden,
+
+</seg>
+			</tuv>
+		</tu>
+		<tu>
+			<tuv xml:lang="en">
+				<seg>
+00:02:26,960 --&gt; 00:02:29.291
+in order to benchmark PLLs.
+
+</seg>
+			</tuv>
+			<tuv xml:lang="de">
+				<seg>
+00:02:26,960 --&gt; 00:02:29.291
+um PLLs zu bewerten.
+
+</seg>
+			</tuv>
+		</tu>
+	</body>
+</tmx>

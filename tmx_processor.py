@@ -1,8 +1,10 @@
 import os
 
+import file_handler
+import tmx_xml_vtt_handler
 from CONSTANTS import VTT_MIN_ARGS, ERR_CODE_COMMAND_LINE_ARGS, \
-    ERR_CODE_NON_EXISTING_W_E
-from error_manager import run_error
+    ERR_CODE_NON_EXISTING_W_E, WARNING_NOT_A_TMX_FILE
+from error_manager import run_error, run_warning
 
 
 def _process_directory_of_files(directory, language):
@@ -16,7 +18,9 @@ def _process_directory_of_files(directory, language):
     Returns:
         None
     """
-
+    for path in os.listdir(directory):
+        full_path = os.path.join(directory, path)
+        _process_single_file(full_path, language)
     pass
 
 
@@ -32,7 +36,22 @@ def _process_single_file(file_path, language):
     Returns:
         None
     """
-    pass
+    input_filename = file_path.rsplit(os.path.sep, 1)[-1]
+    if not input_filename.endswith('.tmx'):
+        run_warning(WARNING_NOT_A_TMX_FILE, file_path)
+        return
+
+    # -- Get vtt file content
+    vtt_content = tmx_xml_vtt_handler.create_vtt_from_tmx(file_path, language)
+
+    # -- Get output directory
+    output_directory = file_handler.get_output_directory()
+    # -- Get only the filepath
+    input_filename = file_path.rsplit(os.path.sep, 1)[-1]
+    output_filename = input_filename[:-4] + ".vtt"
+    full_output_path = os.path.join(output_directory, output_filename)
+    with open(full_output_path, mode='w') as file:
+        file.write(vtt_content)
 
 
 def process_tmx_file(arguments):
