@@ -65,18 +65,41 @@ def _create_dict(lines):
 
 
 def _process_srt_by_dir(directory_path, src_lang):
-    src_lang = src_lang.lower()
+    """
+    Essentially processes .srt files in the same way as _full_srt_process, but
+    takes an entire directory as the input. Files are taken as pairs, so that
+    pairs have the same name except the postfix of the filename (not the
+    extension). The postfix of exactly one of the pairs must be the same as the
+    src_lang parameter eg. filename-one-EN.srt, filename-one-DE.srt, for a
+    src_lang parameter of either EN or DE.
+
+    Arguments:
+        directory_path: The directory from which to pull .srt file pairs
+        src_lang: The language of the source file, and also the postfix of
+        exactly one of the file pairs
+
+    Returns:
+        None
+    """
     if not os.path.exists(directory_path):
         run_error(ERR_CODE_NON_EXISTING_DIRECTORY, directory_path)
 
-    files_to_translate = {}
-    # -- filename - {source-file, source-lang, trans-file, trans-lang}
+    # -- Transform the src_lang to lower at once so that no problems are caused
+    # later due to casing
+    src_lang = src_lang.lower()
 
+    # -- Filename - {source-file, source-lang, trans-file, trans-lang}
+    files_to_translate = {}
+
+    # -- Create {"path1":"path1", lang1:"lang1",
+    # "path2":"path2", "lang2":"lang2"} dicts for
+    # each unique filename with it's trailing
+    # language sliced off.
     for item in os.listdir(directory_path):
         filename = item.split(".srt")[0][:-3]
         if filename not in files_to_translate:
             files_to_translate[filename] = {}
-        
+
         t = {}
         file_lang = item.split(".srt")[0][-2:].lower()
         if file_lang == src_lang:
@@ -91,12 +114,16 @@ def _process_srt_by_dir(directory_path, src_lang):
         files_to_translate[filename].update(t)
 
     for k, v in files_to_translate.items():
+        # Check if any files or paths are found by themselves, and raise a
+        # warning
         if not ('path1' in v and
                 'lang1' in v and
                 'path2' in v and
                 'lang2' in v):
             run_warning(WARNING_CODE_NO_PAIR_FOUND, k)
             continue
+        # -- If all is well, forward items to the _full_srt_process function
+        # with predetermined filename
         path1 = v['path1']
         lang1 = v['lang1']
         path2 = v['path2']
@@ -105,6 +132,14 @@ def _process_srt_by_dir(directory_path, src_lang):
 
 
 def process_srt(arguments):
+    """
+    Processes arguments for creating tmx files.
+
+    Arguments:
+        arguments: arguments from the command line which must have either 4 or
+        2 args. The arguments can be seen in the help_script section of the
+        project.
+    """
     if arguments is None or (len(arguments) != 4 and len(arguments) != 2):
         run_error(ERR_CODE_COMMAND_LINE_ARGS)
 
