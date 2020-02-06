@@ -1,4 +1,4 @@
-import printing_utilities as pu
+from utilities import printing_utilities as pu
 from CONSTANTS import ERR_CODE_NON_EXISTING_DIRECTORY, \
     ERR_CODE_NON_EXISTING_FILE, ERR_CODE_CREATING_XML, \
     ERR_CODE_COMMAND_LINE_ARGS, WARNING_CODE_INVALID_FORMAT, \

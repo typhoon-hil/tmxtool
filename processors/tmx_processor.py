@@ -1,10 +1,10 @@
 import os
 
-import file_handler
-import tmx_xml_vtt_handler
+from utilities import file_handler
+from processors import tmx_xml_vtt_handler
 from CONSTANTS import VTT_MIN_ARGS, ERR_CODE_COMMAND_LINE_ARGS, \
     ERR_CODE_NON_EXISTING_W_E, WARNING_NOT_A_TMX_FILE
-from error_manager import run_error, run_warning
+from utilities.error_manager import run_error, run_warning
 
 
 def _process_directory_of_files(directory, language):

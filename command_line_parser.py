@@ -1,13 +1,12 @@
 
 import CONSTANTS as constants
-import help_script
-import srt_processor
-import tmx_processor
-from error_manager import run_error
+from utilities import help_script
+from processors import tmx_processor, srt_processor
+from utilities.error_manager import run_error
 
 import re
 
-from tmx_xml_vtt_handler import create_vtt_from_tmx
+from processors.tmx_xml_vtt_handler import create_vtt_from_tmx
 
 
 def sandbox(arguments):

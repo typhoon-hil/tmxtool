@@ -1,13 +1,10 @@
-from CONSTANTS import ERR_CODE_COMMAND_LINE_ARGS, ERR_CODE_NON_EXISTING_FILE, \
-    WARNING_CODE_INVALID_FORMAT, ERR_CODE_NON_EXISTING_DIRECTORY, \
+from CONSTANTS import ERR_CODE_COMMAND_LINE_ARGS, WARNING_CODE_INVALID_FORMAT, ERR_CODE_NON_EXISTING_DIRECTORY, \
     WARNING_CODE_NO_PAIR_FOUND, ERR_CODE_CREATING_XML, TMX_MIN_ARGS
-from error_manager import run_warning, run_error
-from file_handler import get_file_content_safe, get_output_directory, \
-    get_output_file_name
-from tmx_xml_vtt_handler import create_tmx_from_dicts
+from utilities.error_manager import run_warning, run_error
+from utilities.file_handler import get_file_content_safe, get_output_file_name
+from processors.tmx_xml_vtt_handler import create_tmx_from_dicts
 
-
-import printing_utilities as pu
+from utilities import printing_utilities as pu
 import time
 import os
 

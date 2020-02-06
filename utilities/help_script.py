@@ -1,5 +1,4 @@
-
-import printing_utilities as pu
+from utilities import printing_utilities as pu
 
 
 def print_usage_and_switches():
