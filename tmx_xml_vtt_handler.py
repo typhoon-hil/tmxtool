@@ -5,6 +5,16 @@ import re
 
 
 def _format_time(time_string):
+    """
+    Takes the time string and replaces all commas with full stops.
+
+    The time string can contain commas or full stops.
+    Arguments:
+        time_string: A string in the format "00:00:00,000 --> 00:00:00,000"
+
+    Returns:
+        The same as the time_string but with commas turned into full stops.
+    """
     # patter: don't care if it has a dot or comma, just split all numbers
     # universally, then connect them with dots
     number_pattern = "([0-9]{2}:[0-9]{2}:[0-9]{2})[,.]([0-9]{3})"
@@ -63,6 +73,16 @@ def create_tmx_from_dicts(src_dict, src_lang, tr_dict, tr_lang):
 
 
 def create_vtt_from_tmx(path_to_tmx, target_language):
+    """
+    Creates a .vtt document text to be saved in a .vtt file.
+
+    Arguments:
+        path_to_tmx: Path to the .tmx file to be processed.
+        target_language: Language to filer out from the .tmx file.
+
+    Returns:
+        Text to be saved into a .vtt file.
+    """
     # -- Gets the root of the file, and then parses for any <tuv> tags
     # -- When <tuv> tags are found, all children with the target_language
     # as the attribute are added to the list of items to process further
