@@ -38,5 +38,9 @@ def create_xml_from_dicts(src_dict, src_lang, tr_dict, tr_lang):
     dom = ET.tostring(root, encoding='unicode', method='xml')
     # -- Before returning, remove the first line of the string
     tempstring = xml.dom.minidom.parseString(dom).toprettyxml()
-    tempstring = tempstring.split('\n', 1)[1]
+    # tempstring = tempstring.split('\n', 1)[1]
     return tempstring
+
+
+def create_vtt_from_tmx(path_to_tmx, target_language):
+    pass

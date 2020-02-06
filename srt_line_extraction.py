@@ -2,7 +2,7 @@ from CONSTANTS import ERR_CODE_COMMAND_LINE_ARGS, ERR_CODE_NON_EXISTING_FILE, \
     WARNING_CODE_INVALID_FORMAT, ERR_CODE_NON_EXISTING_DIRECTORY, \
     WARNING_CODE_NO_PAIR_FOUND, ERR_CODE_CREATING_XML
 from error_manager import run_warning, run_error
-from tmx_xml_creator import create_xml_from_dicts
+from tmx_xml_vtt_handler import create_xml_from_dicts
 
 
 import printing_utilities as pu
