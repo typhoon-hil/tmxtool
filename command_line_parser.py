@@ -10,6 +10,9 @@ from tmx_xml_vtt_handler import create_vtt_from_tmx
 
 
 def sandbox(arguments):
+    """
+    Dev method for trying out methods.
+    """
     print("sandbox")
     check_string = "00:12:44,412 --> 00:12:47,334"
     number_pattern = "([0-9]{2}:[0-9]{2}:[0-9]{2}),([0-9]{3})"
@@ -18,10 +21,18 @@ def sandbox(arguments):
     # m = p.match(check_string)
     # print(m)
     x = re.split(pattern, check_string)
-    create_vtt_from_tmx(r"C:\REPOS\tmxtool\supporting_documents\1.0 Video Introduction.tmx", 'de')
+    create_vtt_from_tmx(r"C:\REPOS\tmxtool\supporting_documents\
+    1.0 Video Introduction.tmx", 'de')
 
 
 def parse_command_line_args(command_line_args):
+    """
+    Main entry point from the main script.
+    This is a middle man to send arguments to other, more deserving functions.
+
+    Arguments:
+        command_line_args: Arguments from the main methods command line
+    """
     if len(command_line_args) < constants.COMMAND_LINE_MIN_ARGS:
         run_error(constants.ERR_CODE_COMMAND_LINE_ARGS)
 
