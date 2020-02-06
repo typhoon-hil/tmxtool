@@ -1,6 +1,20 @@
 import xml.etree.ElementTree as ET
 import xml.dom.minidom
 
+import re
+
+
+def _format_time(time_string):
+    # patter: don't care if it has a dot or comma, just split all numbers
+    # universally, then connect them with dots
+    number_pattern = "([0-9]{2}:[0-9]{2}:[0-9]{2})[,.]([0-9]{3})"
+    number_pattern += ' --> ' + number_pattern
+    result = re.split(number_pattern, time_string)
+    # -- Remove blanks
+    result = [res for res in result if len(res) != 0]
+    return result[0] + "." + result[1] + " --> " + result[2] + "." + result[3]
+
+
 
 def create_xml_from_dicts(src_dict, src_lang, tr_dict, tr_lang):
     # -- Create root
@@ -43,4 +57,33 @@ def create_xml_from_dicts(src_dict, src_lang, tr_dict, tr_lang):
 
 
 def create_vtt_from_tmx(path_to_tmx, target_language):
-    pass
+    # -- Gets the root of the file, and then parses for any <tuv> tags
+    # -- When <tuv> tags are found, all children with the target_language
+    # as the attribute are added to the list of items to process further
+    tree = ET.parse(path_to_tmx)
+    root = tree.getroot()
+    text_items = []
+    for child in root.iter('tuv'):
+        if target_language in child.attrib.values():
+            print(child[0].text)
+            text_items.append(
+                tuple([item for item in child[0].text.split('\n')
+                       if len(item.strip()) != 0]))
+
+    vtt_document = "WEBVTT\n"
+
+    for item_tuple in text_items:
+        # -- Get and process the time from the tuple
+        # (it will always be on first place)
+        time = _format_time(item_tuple[0])
+
+        # -- Configure alignment text
+        alignment_text = " align:middle line:" + \
+                         ("84%" if len(item_tuple[1:]) > 1 else "90%") + "\n"
+
+        # -- Configure rest of text
+        rest_of_text = "\n".join([text.strip() for text in item_tuple[1:]])
+
+        vtt_document += "\n" + time + alignment_text + rest_of_text + "\n"
+
+    print(vtt_document)

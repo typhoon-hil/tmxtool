@@ -6,6 +6,8 @@ from error_manager import run_error
 
 import re
 
+from tmx_xml_vtt_handler import create_vtt_from_tmx
+
 
 def sandbox(arguments):
     print("sandbox")
@@ -16,7 +18,7 @@ def sandbox(arguments):
     # m = p.match(check_string)
     # print(m)
     x = re.split(pattern, check_string)
-    print(x)
+    create_vtt_from_tmx(r"C:\REPOS\tmxtool\supporting_documents\1.0 Video Introduction.tmx", 'de')
 
 
 def parse_command_line_args(command_line_args):
