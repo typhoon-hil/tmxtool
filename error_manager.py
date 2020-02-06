@@ -6,6 +6,17 @@ from CONSTANTS import ERR_CODE_NON_EXISTING_DIRECTORY, \
 
 
 def run_error(err_code, err_content=None, exception=None):
+    """
+    Prints an error for the user and exists out of the program
+
+    Arguments:
+        err_code: Indicates which error happened. Can be used from CONSTANTS.
+        err_content: Something custom to print in the console.
+        exception: Optional exception that can be shown to the user.
+
+    Returns:
+        None
+    """
     if err_code == ERR_CODE_NON_EXISTING_DIRECTORY:
         pu.display_message('Error: The directory you provided was not found ['
                            + err_content + ']. Script exited.')
@@ -30,6 +41,15 @@ def run_error(err_code, err_content=None, exception=None):
 
 
 def run_warning(warn_code, warn_content, exception=None):
+    """
+    Prints a warning for the user and returns the warning code. Does not exit
+    out of the program.
+
+    Arguments:
+        warn_code: Code for the warning message. Can be found in CONSTANTS.
+        warn_content: Custom content to show the user.
+        exception: Exception to show to the user.
+    """
     if warn_code == WARNING_CODE_INVALID_FORMAT:
         pu.display_message('Warning: invalid content format found:')
         pu.display_message('|---ID: [' + warn_content[0] + ']')
