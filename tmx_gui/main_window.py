@@ -2,6 +2,7 @@ import tkinter
 from tkinter import Tk, Label, Button, Frame
 
 import CONSTANTS as const
+from tmx_gui.srt_to_tmx_panel import SrtToTmxPanel
 from tmx_gui.tmx_to_vtt_panel import TmxToVttPanel
 
 
@@ -55,12 +56,11 @@ class MainWindow(Frame):
 
     def open_window(self, window_flag):
         if window_flag == const.WINDOW_GENERATE_TMX:
-            # -- create generate tmx window
-            pass
+            dialog = SrtToTmxPanel(self.master)
+            self.master.wait_window(dialog.top)
         elif window_flag == const.WINDOW_GENERATE_VTT:
             dialog = TmxToVttPanel(self.master)
             self.master.wait_window(dialog.top)
-            pass
 
 
 if __name__ == '__main__':
