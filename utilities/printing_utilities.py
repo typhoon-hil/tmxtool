@@ -15,14 +15,14 @@ def display_message(*messages, where_to_print=constants.PRINT_CONSOLE):
     Returns:
         None
     """
-    if constants.SUPPRESS_PRINT:
-        return
 
     text = ""
     for message in messages:
         text += message
 
     if where_to_print == constants.PRINT_CONSOLE:
+        if constants.SUPPRESS_CONSOLE_PRINT:
+            return
         print(text)
     elif where_to_print == constants.PRINT_MESSAGEBOX:
         messagebox.showinfo("Info", text)
