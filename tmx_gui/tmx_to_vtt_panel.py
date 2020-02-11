@@ -75,7 +75,7 @@ class TmxToVttPanel:
                                              value=SELECTION_SINGLE_FILE,
                                              variable=self.
                                              string_var_selected_radio,
-                                             command=self.radio_selection)
+                                             command=self._radio_selection)
         self.radio_single_file.grid(row=row, column=column, sticky=tkinter.W,
                                     **grid_configurations)
         qrf()
@@ -91,7 +91,7 @@ class TmxToVttPanel:
         self.button_browse_single_file = \
             tkinter.Button(self.master,
                            text="Browse",
-                           command=self.browse_button_file_clicked)
+                           command=self._browse_button_file_clicked)
         self.button_browse_single_file.grid(row=row, column=column,
                                             **grid_configurations)
         qrf()
@@ -106,7 +106,7 @@ class TmxToVttPanel:
                                                 value=SELECTION_MULTIPLE_FILES,
                                                 variable=self.
                                                 string_var_selected_radio,
-                                                command=self.radio_selection)
+                                                command=self._radio_selection)
         self.radio_single_file.select()
         self.radio_multiple_files.grid(row=row, column=column, sticky=tkinter.W,
                                        **grid_configurations)
@@ -124,7 +124,7 @@ class TmxToVttPanel:
         self.button_browse_multiple_files = \
             tkinter.Button(self.master,
                            text="Browse",
-                           command=self.browse_button_directory_clicked,
+                           command=self._browse_button_directory_clicked,
                            state=tkinter.DISABLED)
         self.button_browse_multiple_files.grid(row=row, column=column,
                                                **grid_configurations)
@@ -148,14 +148,14 @@ class TmxToVttPanel:
         row += 1
         column = 0
         self.button_exit = Button(self.master, text="Back",
-                                  command=self.close)
+                                  command=self._close)
         self.button_exit.grid(row=row, column=column, **grid_configurations,
                               sticky='we')
         qrf()
         column += 1
         self.button_generate = Button(self.master,
                                       text="Generate .vtt",
-                                      command=self.generate_vtt)
+                                      command=self._generate_vtt)
         self.button_generate.grid(row=row, column=column,
                                   columnspan=2, **grid_configurations,
                                   sticky='we')
@@ -167,11 +167,11 @@ class TmxToVttPanel:
         self.master.focus_set()
         self.master.grab_set()
 
-    def close(self):
+    def _close(self):
         self.master.grab_release()
         self.master.destroy()
 
-    def generate_vtt(self):
+    def _generate_vtt(self):
         selection = self.string_var_selected_radio.get()
         if selection == SELECTION_MULTIPLE_FILES:
             path = self.string_var_multiple_files.get()
@@ -184,7 +184,7 @@ class TmxToVttPanel:
             where_to_print=CONSTANTS.PRINT_MESSAGEBOX
         )
 
-    def radio_selection(self):
+    def _radio_selection(self):
         selection = self.string_var_selected_radio.get()
 
         if selection == SELECTION_MULTIPLE_FILES:
@@ -198,12 +198,12 @@ class TmxToVttPanel:
             self.textbox_multiple_files.configure(state=tkinter.DISABLED)
             self.textbox_single_file.configure(state=tkinter.NORMAL)
 
-    def browse_button_directory_clicked(self):
+    def _browse_button_directory_clicked(self):
         dirname = filedialog.askdirectory(initialdir="/",
                                           title="Select a directory")
         self.string_var_multiple_files.set(dirname)
 
-    def browse_button_file_clicked(self):
+    def _browse_button_file_clicked(self):
         filename = filedialog.askopenfilename(initialdir="/",
                                               title="Select .tmx File",
                                               filetype=(("tmx files", "*.tmx"),
