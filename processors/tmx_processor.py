@@ -24,7 +24,7 @@ def _process_directory_of_files(directory, language):
         full_path = os.path.join(directory, path)
         _process_single_file(full_path, language)
     pu.display_message('Processed everything in directory: [' + directory + ']')
-    pass
+    return directory
 
 
 def _process_single_file(file_path, language):
@@ -56,7 +56,7 @@ def _process_single_file(file_path, language):
     output_directory = file_handler.get_output_directory()
     # -- Get only the filepath
     input_filename = file_path.rsplit(os.path.sep, 1)[-1]
-    output_filename = input_filename[:-4] + ".vtt"
+    output_filename = os.path.split(input_filename)[1][:-4] + ".vtt"
     full_output_path = os.path.join(output_directory, output_filename)
     pu.display_message('#3 ... created all output paths: [' +
                        output_filename + ', ' + full_output_path + '] !')
@@ -66,6 +66,7 @@ def _process_single_file(file_path, language):
     with open(full_output_path, mode='w') as file:
         file.write(vtt_content)
     pu.display_message('#4 ... all items written to output file!')
+    return full_output_path
 
 
 def process_tmx_file(arguments):
@@ -95,6 +96,6 @@ def process_tmx_file(arguments):
 
     # -- Check if its a directory or not
     if os.path.isdir(path):
-        _process_directory_of_files(path, language)
+        return _process_directory_of_files(path, language)
     else:
-        _process_single_file(path, language)
+        return _process_single_file(path, language)

@@ -2,6 +2,7 @@ import tkinter
 from tkinter import Tk, Label, Button, Frame
 
 import CONSTANTS as const
+from tmx_gui.tmx_to_vtt_panel import TmxToVttPanel
 
 
 class MainWindow(Frame):
@@ -52,13 +53,13 @@ class MainWindow(Frame):
         self.master.grid_columnconfigure(0, weight=2)
         self.master.grid_rowconfigure(row, weight=2)
 
-    @staticmethod
-    def open_window(window_flag):
+    def open_window(self, window_flag):
         if window_flag == const.WINDOW_GENERATE_TMX:
             # -- create generate tmx window
             pass
         elif window_flag == const.WINDOW_GENERATE_VTT:
-            # -- create generate vtt window
+            dialog = TmxToVttPanel(self.master)
+            self.master.wait_window(dialog.top)
             pass
 
 

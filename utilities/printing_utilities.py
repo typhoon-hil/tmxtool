@@ -1,6 +1,9 @@
+from tkinter import messagebox
+
+import CONSTANTS as constants
 
 
-def display_message(*messages):
+def display_message(*messages, where_to_print=constants.PRINT_CONSOLE):
     """
     Prints a message for the user on the console.
 
@@ -12,5 +15,14 @@ def display_message(*messages):
     Returns:
         None
     """
+    if constants.SUPPRESS_PRINT:
+        return
+
+    text = ""
     for message in messages:
-        print(message)
+        text += message
+
+    if where_to_print == constants.PRINT_CONSOLE:
+        print(text)
+    elif where_to_print == constants.PRINT_MESSAGEBOX:
+        messagebox.showinfo("Info", text)
