@@ -24,7 +24,7 @@ def _process_directory_of_files(directory, language):
         full_path = os.path.join(directory, path)
         _process_single_file(full_path, language)
     pu.display_message('Processed everything in directory: [' + directory + ']')
-    return directory
+    return file_handler.get_output_directory()
 
 
 def _process_single_file(file_path, language):

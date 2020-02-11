@@ -1,4 +1,5 @@
 import os
+import sys
 
 from CONSTANTS import ERR_CODE_NON_EXISTING_FILE
 from utilities.error_manager import run_error
@@ -31,7 +32,9 @@ def get_output_directory():
     created first, then returned. (created as script_location/output/)
     """
     output_directory_path = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)), "output")
+        # os.path.dirname(os.path.abspath(__file__)), "output")
+        os.path.dirname(os.path.abspath(sys.argv[0])), "output"
+    )
     if not os.path.exists(output_directory_path):
         os.mkdir(output_directory_path)
     return output_directory_path

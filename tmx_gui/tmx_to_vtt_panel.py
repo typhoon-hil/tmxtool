@@ -1,7 +1,9 @@
 from tkinter import Tk, Label, Button, Radiobutton, filedialog, messagebox
 import tkinter
 
+import CONSTANTS
 from processors import tmx_processor
+from utilities import printing_utilities
 
 SELECTION_SINGLE_FILE = 'SINGLE_FILE'
 SELECTION_MULTIPLE_FILES = 'MULTIPLE_FILES'
@@ -177,7 +179,10 @@ class TmxToVttPanel:
             path = self.string_var_single_file.get()
         lang = self.string_var_target_language
         path = tmx_processor.process_tmx_file((path, lang))
-        messagebox.showinfo("Tmx to Vtt", "File saved to: [" + path + "]")
+        printing_utilities.display_message(
+            "Result saved to: [" + path + "]",
+            where_to_print=CONSTANTS.PRINT_MESSAGEBOX
+        )
 
     def radio_selection(self):
         selection = self.string_var_selected_radio.get()
