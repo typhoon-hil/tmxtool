@@ -177,7 +177,7 @@ class TmxToVttPanel:
             path = self.string_var_multiple_files.get()
         else:
             path = self.string_var_single_file.get()
-        lang = self.string_var_target_language
+        lang = self.string_var_target_language.get()
         path = tmx_processor.process_tmx_file((path, lang))
         printing_utilities.display_message(
             "Result saved to: [" + path + "]",

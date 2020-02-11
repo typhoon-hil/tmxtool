@@ -49,6 +49,7 @@ def _process_single_file(file_path, language):
     # -- Get vtt file content
     pu.display_message("#2 Getting .vtt content ...")
     vtt_content = tmx_xml_vtt_handler.create_vtt_from_tmx(file_path, language)
+    print(vtt_content, language)
     pu.display_message('#2 ... got all .vtt content!')
 
     # -- Get output directory
