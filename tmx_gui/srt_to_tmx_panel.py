@@ -19,13 +19,6 @@ class SrtToTmxPanel:
         # -- Setup some decorations
         grid_configurations = CONSTANTS.GRID_CONFIGURATIONS
 
-        # -- Configure invisible items
-        self.string_var_single_file = tkinter.\
-            StringVar(self.master, value='Path to tmx file ...')
-        self.string_var_multiple_files = tkinter.\
-            StringVar(self.master, value='Path to directory ...')
-        self.string_var_target_language = tkinter.StringVar(self.master,
-                                                            value="de")
         row = 0
         column = 0
 
@@ -84,6 +77,10 @@ class SrtToTmxPanel:
                                     **grid_configurations)
 
         # Configure frame for single pair components
+        inner_grid_configurations = {
+            'padx': 3,
+            'pady': 8
+        }
         row += 1
         self.frame_single_pair = tkinter.Frame(self.master,
                                                highlightthickness=1,
@@ -99,16 +96,23 @@ class SrtToTmxPanel:
             self.frame_single_pair, text="Source file: "
         )
         self.label_single_pair_source_file.grid(row=inner_row,
-                                                column=inner_column)
+                                                column=inner_column,
+                                                **inner_grid_configurations,
+                                                sticky="e")
         # Configure entry for single pair source file
-        self.string_var_single_pair = tkinter.StringVar()
-        self.string_var_single_pair.set('Path to source .tmx file')
+        self.string_var_single_pair_source_location = tkinter.StringVar()
+        self.string_var_single_pair_source_location.set(
+            'Path to source .srt file ...'
+        )
         inner_column += 1
         self.entry_single_pair_source_file = tkinter.Entry(
-            self.frame_single_pair, textvariable=self.string_var_single_file
+            self.frame_single_pair,
+            textvariable=self.string_var_single_pair_source_location
         )
         self.entry_single_pair_source_file.grid(row=inner_row,
-                                                column=inner_column)
+                                                column=inner_column,
+                                                **inner_grid_configurations,
+                                                sticky='we')
         # Configure browse single pair source file button
         inner_column += 1
         self.button_single_pair_source_file = Button(
@@ -116,8 +120,47 @@ class SrtToTmxPanel:
             command=self._command_browse_single_file_source
         )
         self.button_single_pair_source_file.grid(row=inner_row,
-                                                 column=inner_column)
+                                                 column=inner_column,
+                                                 **inner_grid_configurations)
 
+        # Configure Label for single pair translation file
+        inner_row += 1
+        inner_column = 0
+        self.label_single_pair_translation_file = Label(
+            self.frame_single_pair, text="Translation file: "
+        )
+        self.label_single_pair_translation_file.grid(
+            row=inner_row,
+            column=inner_column,
+            **inner_grid_configurations,
+            sticky="e"
+        )
+        # Configure entry for single pair translation file
+        self.string_var_single_pair_translation_location = tkinter.StringVar()
+        self.string_var_single_pair_translation_location.set(
+            'Path to translation .srt file ...'
+        )
+        inner_column += 1
+        self.entry_single_pair_translation_file = tkinter.Entry(
+            self.frame_single_pair,
+            textvariable=self.string_var_single_pair_translation_location
+        )
+        self.entry_single_pair_translation_file.grid(
+            row=inner_row,
+            column=inner_column,
+            **inner_grid_configurations,
+            sticky='we'
+        )
+        # Configure browse single pair translation file button
+        inner_column += 1
+        self.button_single_pair_translation_file = Button(
+            self.frame_single_pair, text="Browse",
+            command=self._command_browse_single_file_translation
+        )
+        self.button_single_pair_translation_file.grid(
+            row=inner_row, column=inner_column, **inner_grid_configurations
+        )
+        self.frame_single_pair.grid_columnconfigure(1, weight=2)
 
         # Radio button for directory selection
         row += 1
@@ -129,7 +172,7 @@ class SrtToTmxPanel:
                                              string_var_selected_radio,
                                              command=self._radio_selection)
         self.radio_single_pair.grid(row=row, column=column, sticky=tkinter.W,
-                                    **grid_configurations)
+                                    **inner_grid_configurations)
 
 
         # -- Configure exit button
@@ -151,20 +194,30 @@ class SrtToTmxPanel:
         for idx in range(row):
             self.master.grid_rowconfigure(idx, weight=2)
 
+        for idx in range(2):
+            self.master.grid_columnconfigure(idx, weight=2)
+
         # -- Set modal and grab focus
         self.master.focus_set()
         self.master.grab_set()
 
     def _command_browse_single_file_source(self):
-        pass
+        print('source file browse')
+
+    def _command_browse_single_file_translation(self):
+        print('translation file browse')
 
     def _radio_selection(self):
         selection = self.string_var_selected_radio.get()
-        print(selection)
+
+        def _enable_disable_frame(target_frame, state):
+            for child in target_frame.winfo_children():
+                child.configure(state=state)
+
         if selection == SELECTION_SINGLE_FILE_PAIR:
-            print('single pair')
+            _enable_disable_frame(self.frame_single_pair, tkinter.NORMAL)
         elif selection == SELECTION_DIRECTORY:
-            print('directory')
+            _enable_disable_frame(self.frame_single_pair, tkinter.DISABLED)
 
     def generate_tmx(self):
         print('generate tmx')
