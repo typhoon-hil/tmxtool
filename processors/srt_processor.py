@@ -110,6 +110,7 @@ def _process_srt_by_dir(directory_path, src_lang):
 
         files_to_translate[filename].update(t)
 
+    files = []
     for k, v in files_to_translate.items():
         # Check if any files or paths are found by themselves, and raise a
         # warning
@@ -125,7 +126,12 @@ def _process_srt_by_dir(directory_path, src_lang):
         lang1 = v['lang1']
         path2 = v['path2']
         lang2 = v['lang2']
-        _full_srt_process(path1, lang1, path2, lang2, str(k) + ".tmx")
+        filepath = \
+            _full_srt_process(path1, lang1, path2, lang2, str(k) + ".tmx")
+        if filepath is not None:
+            files.append(filepath)
+
+    return files
 
 
 def process_srt(arguments):
@@ -141,12 +147,13 @@ def process_srt(arguments):
         run_error(ERR_CODE_COMMAND_LINE_ARGS)
 
     if len(arguments) == 4:
-        _full_srt_process(arguments[0],
-                          arguments[1],
-                          arguments[2],
-                          arguments[3])
+        return _full_srt_process(
+            arguments[0],
+            arguments[1],
+            arguments[2],
+            arguments[3])
     else:
-        _process_srt_by_dir(arguments[0], arguments[1])
+        return _process_srt_by_dir(arguments[0], arguments[1])
 
 
 def _full_srt_process(path1, lang1, path2, lang2, result_name=None):
@@ -196,3 +203,4 @@ def _full_srt_process(path1, lang1, path2, lang2, result_name=None):
     except Exception as e:
         run_error(ERR_CODE_CREATING_XML, full_file_path, e)
     pu.display_message("#3 ... File " + full_file_path + " generated!\n")
+    return full_file_path

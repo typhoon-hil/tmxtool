@@ -15,7 +15,7 @@ SELECTION_DIRECTORY = 'DIRECTORY'
 class SrtToTmxPanel:
     def __init__(self, master):
         self.master = self.top = tkinter.Toplevel(master)
-
+        self.master.geometry("680x400")
         # -- Setup some decorations
         grid_configurations = CONSTANTS.GRID_CONFIGURATIONS
 
@@ -36,7 +36,7 @@ class SrtToTmxPanel:
         for idx in range(self.row):
             self.master.grid_rowconfigure(idx, weight=2)
 
-        for idx in range(1):
+        for idx in range(2):
             self.master.grid_columnconfigure(idx, weight=2)
 
         # -- Set modal and grab focus
@@ -47,13 +47,23 @@ class SrtToTmxPanel:
             child.configure(state=tkinter.DISABLED)
 
     def _command_browse_single_file_source(self):
-        print('source file browse')
+        filename = filedialog.askopenfilename(initialdir="/",
+                                              title="Select .srt File",
+                                              filetype=(("srt files", "*.srt"),
+                                                        ("all files", "*.*")))
+        self.string_var_single_pair_source_location.set(filename)
 
     def _command_browse_single_file_translation(self):
-        print('translation file browse')
+        filename = filedialog.askopenfilename(initialdir="/",
+                                              title="Select .srt File",
+                                              filetype=(("srt files", "*.srt"),
+                                                        ("all files", "*.*")))
+        self.string_var_single_pair_translation_location.set(filename)
 
     def _command_browse_directory(self):
-        print('browse directory')
+        dir_name = filedialog.askdirectory(initialdir="/",
+                                           title="Select a directory")
+        self.string_var_directory_location.set(dir_name)
 
     def _radio_selection(self):
         selection = self.string_var_selected_radio.get()
@@ -65,12 +75,11 @@ class SrtToTmxPanel:
         if selection == SELECTION_SINGLE_FILE_PAIR:
             _enable_disable_frame(self.frame_single_pair, tkinter.NORMAL)
             _enable_disable_frame(self.frame_directory, tkinter.DISABLED)
+            self.entry_translation_language.configure(state=tkinter.NORMAL)
         elif selection == SELECTION_DIRECTORY:
             _enable_disable_frame(self.frame_single_pair, tkinter.DISABLED)
             _enable_disable_frame(self.frame_directory, tkinter.NORMAL)
-
-    def _generate_tmx(self):
-        print('generate tmx')
+            self.entry_translation_language.configure(state=tkinter.DISABLED)
 
     def _make_single_pair_frame(self):
         grid_configurations = CONSTANTS.GRID_CONFIGURATIONS
@@ -188,14 +197,15 @@ class SrtToTmxPanel:
         }
         # Radio button for directory selection
         self.row += 1
-        self.radio_single_pair = Radiobutton(self.master,
+        self.column = 0
+        self.radio_directory = Radiobutton(self.master,
                                              text='Multiple Files',
                                              indicator=1,
                                              value=SELECTION_DIRECTORY,
                                              variable=self.
                                              string_var_selected_radio,
                                              command=self._radio_selection)
-        self.radio_single_pair.grid(
+        self.radio_directory.grid(
             row=self.row,
             column=self.column,
             sticky=tkinter.W,
@@ -256,6 +266,7 @@ class SrtToTmxPanel:
             column=inner_column,
             **inner_grid_configurations
         )
+        self.frame_directory.grid_columnconfigure(1, weight=2)
 
     def _make_menu_bar(self):
         # -- Configure items for labeling and showing help
@@ -348,7 +359,8 @@ class SrtToTmxPanel:
         self.entry_source_language = tkinter.Entry(
             self.frame_languages, textvariable=self.string_var_source_language)
         self.entry_translation_language = tkinter.Entry(
-            self.frame_languages, textvariable=self.string_var_translation_language)
+            self.frame_languages,
+            textvariable=self.string_var_translation_language)
 
         # -- Place all in solo frame
         inner_row = 0
@@ -390,3 +402,20 @@ class SrtToTmxPanel:
     def close(self):
         self.master.grab_release()
         self.master.destroy()
+
+    def _generate_tmx(self):
+        selection = self.string_var_selected_radio.get()
+        arguments = []
+
+        if selection == SELECTION_SINGLE_FILE_PAIR:
+            path1 = self.string_var_single_pair_source_location.get()
+            lang1 = self.string_var_source_language.get()
+            path2 = self.string_var_single_pair_translation_location.get()
+            lang2 = self.string_var_translation_language.get()
+            arguments = [path1, lang1, path2, lang2]
+        elif selection == SELECTION_DIRECTORY:
+            path = self.string_var_directory_location.get()
+            source_lang = self.string_var_source_language.get()
+            arguments = [path, source_lang]
+
+
