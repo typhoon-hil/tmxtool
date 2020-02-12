@@ -35,5 +35,5 @@ WINDOW_HEIGHT = 280
 
 GRID_CONFIGURATIONS = {
     'padx': 12,
-    'pady': 8
+    'pady': 6
 }

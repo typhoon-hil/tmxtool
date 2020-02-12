@@ -19,52 +19,61 @@ class SrtToTmxPanel:
         # -- Setup some decorations
         grid_configurations = CONSTANTS.GRID_CONFIGURATIONS
 
-        row = 0
-        column = 0
-
-        # -- Configure items for labeling and showing help
-        label_help_text_single_pair = "Single Pair: Enter the path to a pair" \
-                                      " of .srt files (source language file" \
-                                      " and translation language file) that" \
-                                      " you want to join into a single .tmx" \
-                                      " file."
-        label_help_text_multiple_files = "Multiple Files: Enter the path to" \
-                                         " the directory where file pairs are" \
-                                         " located to create .tmx files. The" \
-                                         " files in the target directory" \
-                                         " should be named the same, except" \
-                                         " for the last three characters " \
-                                         "which should be in the form of " \
-                                         "'-XY' where XY is the abbreviation" \
-                                         " for the source language and" \
-                                         " translation language. In this" \
-                                         " case, the translation language" \
-                                         " is not needed because it will" \
-                                         " be pulled off the translation" \
-                                         " language file postfix."
-        label_help_text_source_language = "Source Language: The abbreviation " \
-                                          "of the source file language."
-        label_help_text_translation_language = "Translation Language: " \
-                                               "The abbreviation of the " \
-                                               "language of the translation " \
-                                               "file."
-        # -- Configure menubar
-        menubar = tkinter.Menu(self.master)
-        menubar.\
-            add_command(help_handles.
-                        get_help_menu_item(self.master,
-                                           [label_help_text_single_pair,
-                                            label_help_text_multiple_files,
-                                            label_help_text_source_language,
-                                            label_help_text_translation_language
-                                            ]
-                                           ))
-        self.master.config(menu=menubar)
+        self.row = 0
+        self.column = 0
 
         # Radiobutton string variable configuration
         self.string_var_selected_radio = tkinter.StringVar()
         self.string_var_selected_radio.set(SELECTION_SINGLE_FILE_PAIR)
 
+        self._make_menu_bar()
+        self._make_single_pair_frame()
+        self._make_directory_frame()
+        self._make_source_and_translation_language_controls()
+
+        self._make_generate_and_exit_buttons()
+
+        for idx in range(self.row):
+            self.master.grid_rowconfigure(idx, weight=2)
+
+        for idx in range(1):
+            self.master.grid_columnconfigure(idx, weight=2)
+
+        # -- Set modal and grab focus
+        self.master.focus_set()
+        self.master.grab_set()
+
+        for child in self.frame_directory.winfo_children():
+            child.configure(state=tkinter.DISABLED)
+
+    def _command_browse_single_file_source(self):
+        print('source file browse')
+
+    def _command_browse_single_file_translation(self):
+        print('translation file browse')
+
+    def _command_browse_directory(self):
+        print('browse directory')
+
+    def _radio_selection(self):
+        selection = self.string_var_selected_radio.get()
+
+        def _enable_disable_frame(target_frame, state):
+            for child in target_frame.winfo_children():
+                child.configure(state=state)
+
+        if selection == SELECTION_SINGLE_FILE_PAIR:
+            _enable_disable_frame(self.frame_single_pair, tkinter.NORMAL)
+            _enable_disable_frame(self.frame_directory, tkinter.DISABLED)
+        elif selection == SELECTION_DIRECTORY:
+            _enable_disable_frame(self.frame_single_pair, tkinter.DISABLED)
+            _enable_disable_frame(self.frame_directory, tkinter.NORMAL)
+
+    def _generate_tmx(self):
+        print('generate tmx')
+
+    def _make_single_pair_frame(self):
+        grid_configurations = CONSTANTS.GRID_CONFIGURATIONS
         # Radio button for single file pair
         self.radio_single_pair = Radiobutton(self.master,
                                              text='Single Pair',
@@ -73,21 +82,30 @@ class SrtToTmxPanel:
                                              variable=self.
                                              string_var_selected_radio,
                                              command=self._radio_selection)
-        self.radio_single_pair.grid(row=row, column=column, sticky=tkinter.W,
-                                    **grid_configurations)
+        self.radio_single_pair.select()
+        self.radio_single_pair.grid(
+            row=self.row,
+            column=self.column,
+            sticky=tkinter.W,
+            **grid_configurations
+        )
 
         # Configure frame for single pair components
         inner_grid_configurations = {
             'padx': 3,
             'pady': 8
         }
-        row += 1
+        self.row += 1
         self.frame_single_pair = tkinter.Frame(self.master,
                                                highlightthickness=1,
                                                highlightbackground="black")
-        self.frame_single_pair.grid(row=row, column=column, sticky='we',
-                                    **grid_configurations,
-                                    columnspan=2)
+        self.frame_single_pair.grid(
+            row=self.row,
+            column=self.column,
+            sticky='we',
+            **grid_configurations,
+            columnspan=2
+        )
 
         # Configure Label for single pair source file
         inner_row = 0
@@ -162,8 +180,14 @@ class SrtToTmxPanel:
         )
         self.frame_single_pair.grid_columnconfigure(1, weight=2)
 
+    def _make_directory_frame(self):
+        grid_configurations = CONSTANTS.GRID_CONFIGURATIONS
+        inner_grid_configurations = {
+            'padx': 3,
+            'pady': 8
+        }
         # Radio button for directory selection
-        row += 1
+        self.row += 1
         self.radio_single_pair = Radiobutton(self.master,
                                              text='Multiple Files',
                                              indicator=1,
@@ -171,56 +195,197 @@ class SrtToTmxPanel:
                                              variable=self.
                                              string_var_selected_radio,
                                              command=self._radio_selection)
-        self.radio_single_pair.grid(row=row, column=column, sticky=tkinter.W,
-                                    **inner_grid_configurations)
+        self.radio_single_pair.grid(
+            row=self.row,
+            column=self.column,
+            sticky=tkinter.W,
+            **inner_grid_configurations
+        )
+        # Configure frame for directory components
+        inner_grid_configurations = {
+            'padx': 3,
+            'pady': 8
+        }
+        self.row += 1
+        self.frame_directory = tkinter.Frame(
+            self.master,
+            highlightthickness=1,
+            highlightbackground="black"
+        )
+        self.frame_directory.grid(
+            row=self.row, column=self.column, sticky='we',
+            **grid_configurations,
+            columnspan=2
+        )
+        # Configure Label for directory
+        inner_row = 0
+        inner_column = 0
+        self.label_directory_location = Label(
+            self.frame_directory, text="Directory location: "
+        )
+        self.label_directory_location.grid(
+            row=inner_row,
+            column=inner_column,
+            **inner_grid_configurations,
+            sticky="e"
+        )
+        # Configure entry for directory
+        self.string_var_directory_location = tkinter.StringVar()
+        self.string_var_directory_location.set(
+            'Path to directory ...'
+        )
+        inner_column += 1
+        self.entry_directory_location = tkinter.Entry(
+            self.frame_directory,
+            textvariable=self.string_var_directory_location
+        )
+        self.entry_directory_location.grid(
+            row=inner_row,
+            column=inner_column,
+            **inner_grid_configurations,
+            sticky='we'
+        )
+        # Configure browse directory button
+        inner_column += 1
+        self.button_directory_location = Button(
+            self.frame_directory, text="Browse",
+            command=self._command_browse_directory
+        )
+        self.button_directory_location.grid(
+            row=inner_row,
+            column=inner_column,
+            **inner_grid_configurations
+        )
 
+    def _make_menu_bar(self):
+        # -- Configure items for labeling and showing help
+        label_help_text_single_pair = "Single Pair: Enter the path to a pair" \
+                                      " of .srt files (source language file" \
+                                      " and translation language file) that" \
+                                      " you want to join into a single .tmx" \
+                                      " file."
+        label_help_text_multiple_files = "Multiple Files: Enter the path to" \
+                                         " the directory where file pairs are" \
+                                         " located to create .tmx files. The" \
+                                         " files in the target directory" \
+                                         " should be named the same, except" \
+                                         " for the last three characters " \
+                                         "which should be in the form of " \
+                                         "'-XY' where XY is the abbreviation" \
+                                         " for the source language and" \
+                                         " translation language. In this" \
+                                         " case, the translation language" \
+                                         " is not needed because it will" \
+                                         " be pulled off the translation" \
+                                         " language file postfix."
+        label_help_text_source_language = "Source Language: The abbreviation " \
+                                          "of the source file language."
+        label_help_text_translation_language = "Translation Language: " \
+                                               "The abbreviation of the " \
+                                               "language of the translation " \
+                                               "file."
+        # -- Configure menubar
+        menubar = tkinter.Menu(self.master)
+        menubar. \
+            add_command(help_handles.
+                        get_help_menu_item(self.master,
+                                           [label_help_text_single_pair,
+                                            label_help_text_multiple_files,
+                                            label_help_text_source_language,
+                                            label_help_text_translation_language
+                                            ]
+                                           ))
+        self.master.config(menu=menubar)
 
+    def _make_generate_and_exit_buttons(self):
+        grid_configurations = CONSTANTS.GRID_CONFIGURATIONS
         # -- Configure exit button
-        row += 1
-        column = 0
+        self.row += 1
+        self.column = 0
         self.button_exit = Button(self.master, text="Back",
                                   command=self.close)
-        self.button_exit.grid(row=row, column=column, **grid_configurations,
-                              sticky='we')
+        self.button_exit.grid(
+            row=self.row,
+            column=self.column,
+            **grid_configurations,
+            sticky='we'
+        )
         # -- Configure generate tmx file button
-        column += 1
+        self.column += 1
         self.button_generate = Button(self.master,
                                       text="Generate .tmx",
-                                      command=self.generate_tmx)
-        self.button_generate.grid(row=row, column=column,
+                                      command=self._generate_tmx)
+        self.button_generate.grid(
+            row=self.row,
+            column=self.column,
+            **grid_configurations,
+            sticky='we'
+        )
+
+    def _make_source_and_translation_language_controls(self):
+        grid_configurations = CONSTANTS.GRID_CONFIGURATIONS
+        self.row += 1
+        self.column = 0
+        self.frame_languages = tkinter.Frame(self.master)
+        self.frame_languages.grid(row=self.row, column=self.column,
+                                  columnspan=2,
                                   **grid_configurations,
                                   sticky='we')
+        # -- Create labels
+        self.label_source_language = Label(
+            self.frame_languages, text='Source Language: ')
+        self.label_translation_language = Label(
+            self.frame_languages, text='Translation Language: '
+        )
 
-        for idx in range(row):
-            self.master.grid_rowconfigure(idx, weight=2)
+        # -- Create entry box string vars
+        self.string_var_source_language = tkinter.StringVar()
+        self.string_var_source_language.set('en')
+        self.string_var_translation_language = tkinter.StringVar()
+        self.string_var_translation_language.set('de')
 
-        for idx in range(2):
-            self.master.grid_columnconfigure(idx, weight=2)
+        # -- Create entry boxes
+        self.entry_source_language = tkinter.Entry(
+            self.frame_languages, textvariable=self.string_var_source_language)
+        self.entry_translation_language = tkinter.Entry(
+            self.frame_languages, textvariable=self.string_var_translation_language)
 
-        # -- Set modal and grab focus
-        self.master.focus_set()
-        self.master.grab_set()
+        # -- Place all in solo frame
+        inner_row = 0
+        inner_column = 0
+        inner_grid_config = {
+            'padx': 5,
+            'pady': 3
+        }
 
-    def _command_browse_single_file_source(self):
-        print('source file browse')
-
-    def _command_browse_single_file_translation(self):
-        print('translation file browse')
-
-    def _radio_selection(self):
-        selection = self.string_var_selected_radio.get()
-
-        def _enable_disable_frame(target_frame, state):
-            for child in target_frame.winfo_children():
-                child.configure(state=state)
-
-        if selection == SELECTION_SINGLE_FILE_PAIR:
-            _enable_disable_frame(self.frame_single_pair, tkinter.NORMAL)
-        elif selection == SELECTION_DIRECTORY:
-            _enable_disable_frame(self.frame_single_pair, tkinter.DISABLED)
-
-    def generate_tmx(self):
-        print('generate tmx')
+        self.label_source_language.grid(
+            row=inner_row,
+            column=inner_column,
+            **inner_grid_config, sticky='w'
+        )
+        inner_column += 1
+        self.entry_source_language.grid(
+            row=inner_row,
+            column=inner_column,
+            **inner_grid_config,
+            sticky='we'
+        )
+        inner_column = 0
+        inner_row += 1
+        self.label_translation_language.grid(
+            row=inner_row,
+            column=inner_column,
+            **inner_grid_config,
+            sticky='w'
+        )
+        inner_column += 1
+        self.entry_translation_language.grid(
+            row=inner_row,
+            column=inner_column,
+            **inner_grid_config,
+            sticky='we'
+        )
+        self.frame_languages.grid_columnconfigure(1, weight=2)
 
     def close(self):
         self.master.grab_release()
