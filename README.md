@@ -1,4 +1,4 @@
-## Typhoon HIL TMX Tool ![typhoon-logo](https://www.typhoon-hil.com/wp-content/uploads/2019/07/logo-white.png)
+## Typhoon HIL TMX Tool ![typhoon-logo](https://www.typhoon-hil.com/trac/chrome/site/typhoon.png)
 
 The TMX Tool is a script used for executing operations related to *.tmx* files.
 
@@ -13,7 +13,10 @@ so no help will be posted on this README.
 Opening the 'About' panel in the GUI will show the address and
  what to do if there are any errors, and how to support the project.
 
-The gui can be ran using the 
+The gui can be ran using the "run.bat" file. If any problems occur using this file
+or the file simply does not run, call your local IT or software colleagues and ask for help.
+
+If all else fails, send a mail to milan.djurisic@typhoon-hil.com and ask for help.
 
 #### - Long ago ..
 All the available commands are listed below with examples:
