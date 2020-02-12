@@ -55,7 +55,7 @@ class TmxToVttPanel:
         self.master.config(menu=menubar)
 
         # -- Configure items for selecting single file
-        self.string_var_selected_radio = SELECTION_SINGLE_FILE_PAIR
+        self.string_var_selected_radio = SELECTION_SINGLE_FILE
 
         # -- Radio for single file pair
         self.radio_single_file = Radiobutton(self.master,

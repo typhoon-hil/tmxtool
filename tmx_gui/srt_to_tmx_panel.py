@@ -83,8 +83,44 @@ class SrtToTmxPanel:
         self.radio_single_pair.grid(row=row, column=column, sticky=tkinter.W,
                                     **grid_configurations)
 
+        # Configure frame for single pair components
+        row += 1
+        self.frame_single_pair = tkinter.Frame(self.master,
+                                               highlightthickness=1,
+                                               highlightbackground="black")
+        self.frame_single_pair.grid(row=row, column=column, sticky='we',
+                                    **grid_configurations,
+                                    columnspan=2)
+
+        # Configure Label for single pair source file
+        inner_row = 0
+        inner_column = 0
+        self.label_single_pair_source_file = Label(
+            self.frame_single_pair, text="Source file: "
+        )
+        self.label_single_pair_source_file.grid(row=inner_row,
+                                                column=inner_column)
+        # Configure entry for single pair source file
+        self.string_var_single_pair = tkinter.StringVar()
+        self.string_var_single_pair.set('Path to source .tmx file')
+        inner_column += 1
+        self.entry_single_pair_source_file = tkinter.Entry(
+            self.frame_single_pair, textvariable=self.string_var_single_file
+        )
+        self.entry_single_pair_source_file.grid(row=inner_row,
+                                                column=inner_column)
+        # Configure browse single pair source file button
+        inner_column += 1
+        self.button_single_pair_source_file = Button(
+            self.frame_single_pair, text="Browse",
+            command=self._command_browse_single_file_source
+        )
+        self.button_single_pair_source_file.grid(row=inner_row,
+                                                 column=inner_column)
+
+
         # Radio button for directory selection
-        row+=1
+        row += 1
         self.radio_single_pair = Radiobutton(self.master,
                                              text='Multiple Files',
                                              indicator=1,
@@ -109,7 +145,7 @@ class SrtToTmxPanel:
                                       text="Generate .tmx",
                                       command=self.generate_tmx)
         self.button_generate.grid(row=row, column=column,
-                                  columnspan=2, **grid_configurations,
+                                  **grid_configurations,
                                   sticky='we')
 
         for idx in range(row):
@@ -118,6 +154,9 @@ class SrtToTmxPanel:
         # -- Set modal and grab focus
         self.master.focus_set()
         self.master.grab_set()
+
+    def _command_browse_single_file_source(self):
+        pass
 
     def _radio_selection(self):
         selection = self.string_var_selected_radio.get()
