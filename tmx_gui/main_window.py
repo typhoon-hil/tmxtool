@@ -1,4 +1,4 @@
-from tkinter import Tk, Button, Frame
+from tkinter import Tk, Button, Frame, messagebox
 
 import CONSTANTS
 import CONSTANTS as const
@@ -58,6 +58,19 @@ class MainWindow(Frame):
         elif window_flag == const.WINDOW_GENERATE_VTT:
             dialog = TmxToVttPanel(self.master)
             self.master.wait_window(dialog.top)
+        elif window_flag == const.WINDOW_ABOUT:
+            messagebox.showinfo("Typhoon HIL TMX Tool!",
+                                "Written with >:C by Milan Djurisic.\n\n"
+                                "All code and documentation can be found "
+                                "@ https://github.com/typhoon-hil/tmxtool.\n\n"
+                                " I try to update the readme as much as "
+                                "possible. If something isn't found on the "
+                                "readme, you should be able the find help "
+                                "in the help menus in each panel.\n\n"
+                                "Support the project by sending me insulin and"
+                                " 'accu-check instant' tracks for checking"
+                                " blood sugar levels.")
+
 
 
 if __name__ == '__main__':

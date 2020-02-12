@@ -1,10 +1,10 @@
-from tkinter import Tk, Label, Button, Radiobutton, filedialog, messagebox
 import tkinter
+from tkinter import Label, Button, Radiobutton, filedialog, messagebox
 
 import CONSTANTS
 from processors import tmx_processor
 from tmx_gui import help_handles
-from utilities import printing_utilities, error_manager
+from utilities import error_manager
 
 SELECTION_SINGLE_FILE = 'SINGLE_FILE'
 SELECTION_MULTIPLE_FILES = 'MULTIPLE_FILES'
