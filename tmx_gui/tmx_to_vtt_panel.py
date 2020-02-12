@@ -19,6 +19,7 @@ class TmxToVttPanel:
 
         # -- Configure invisible items
         self.string_var_selected_radio = tkinter.StringVar()
+        self.string_var_selected_radio.set(SELECTION_SINGLE_FILE)
         self.string_var_single_file = tkinter.\
             StringVar(self.master, value='Path to tmx file ...')
         self.string_var_multiple_files = tkinter.\
@@ -54,7 +55,9 @@ class TmxToVttPanel:
         self.master.config(menu=menubar)
 
         # -- Configure items for selecting single file
-        # -- Radio
+        self.string_var_selected_radio = SELECTION_SINGLE_FILE_PAIR
+
+        # -- Radio for single file pair
         self.radio_single_file = Radiobutton(self.master,
                                              text='Single File',
                                              indicator=1,

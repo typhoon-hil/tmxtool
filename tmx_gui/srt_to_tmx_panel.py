@@ -7,21 +7,10 @@ from tmx_gui import help_handles
 from tmx_gui.help_handles import HelpDialog
 from utilities import printing_utilities
 
-SELECTION_SINGLE_FILE = 'SINGLE_FILE'
-SELECTION_MULTIPLE_FILES = 'MULTIPLE_FILES'
 
+SELECTION_SINGLE_FILE_PAIR = "SINGLE_PAIR"
+SELECTION_DIRECTORY = 'DIRECTORY'
 
-"""
-        column += 1
-        self.help_button = HelpButton(self.master,
-                                      [label_help_text_single_pair,
-                                       label_help_text_multiple_files,
-                                       label_help_text_source_language,
-                                       label_help_text_translation_language])
-        self.help_button.grid(row=row, column=column,
-                              **grid_configurations, sticky='we')
-        qrf()
-"""
 
 class SrtToTmxPanel:
     def __init__(self, master):
@@ -31,7 +20,6 @@ class SrtToTmxPanel:
         grid_configurations = CONSTANTS.GRID_CONFIGURATIONS
 
         # -- Configure invisible items
-        self.string_var_selected_radio = tkinter.StringVar()
         self.string_var_single_file = tkinter.\
             StringVar(self.master, value='Path to tmx file ...')
         self.string_var_multiple_files = tkinter.\
@@ -69,24 +57,40 @@ class SrtToTmxPanel:
                                                "file."
         # -- Configure menubar
         menubar = tkinter.Menu(self.master)
-        menubar.add_command(
-            help_handles.
-                get_help_menu_item(self.master,
-                                   [label_help_text_single_pair,
-                                    label_help_text_multiple_files,
-                                    label_help_text_source_language,
-                                    label_help_text_translation_language]
-                                   ))
+        menubar.\
+            add_command(help_handles.
+                        get_help_menu_item(self.master,
+                                           [label_help_text_single_pair,
+                                            label_help_text_multiple_files,
+                                            label_help_text_source_language,
+                                            label_help_text_translation_language
+                                            ]
+                                           ))
         self.master.config(menu=menubar)
 
-        #  -- Configure items for generating based on selection and exiting
-        # -- Configure generate action
+        # Radiobutton string variable configuration
+        self.string_var_selected_radio = tkinter.StringVar()
+        self.string_var_selected_radio.set(SELECTION_SINGLE_FILE_PAIR)
+
+        # Radio button for single file pair
+        self.radio_single_pair = Radiobutton(self.master,
+                                             text='Single Pair',
+                                             indicator=1,
+                                             value=SELECTION_SINGLE_FILE_PAIR,
+                                             variable=self.
+                                             string_var_selected_radio,
+                                             command=self._radio_selection)
+        self.radio_single_pair.grid(row=row, column=column, sticky=tkinter.W,
+                                    **grid_configurations)
+
+        # -- Configure exit button
         row += 1
         column = 0
         self.button_exit = Button(self.master, text="Back",
                                   command=self.close)
         self.button_exit.grid(row=row, column=column, **grid_configurations,
                               sticky='we')
+        # -- Configure generate tmx file button
         column += 1
         self.button_generate = Button(self.master,
                                       text="Generate .tmx",
@@ -101,6 +105,14 @@ class SrtToTmxPanel:
         # -- Set modal and grab focus
         self.master.focus_set()
         self.master.grab_set()
+
+    def _radio_selection(self):
+        selection = self.string_var_selected_radio.get()
+        print(selection)
+        if selection == SELECTION_SINGLE_FILE_PAIR:
+            print('single pair')
+        elif selection == SELECTION_DIRECTORY:
+            print('directory')
 
     def generate_tmx(self):
         print('generate tmx')
