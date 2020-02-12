@@ -202,5 +202,6 @@ def _full_srt_process(path1, lang1, path2, lang2, result_name=None):
             result_file.write(xml_string)
     except Exception as e:
         run_error(ERR_CODE_CREATING_XML, full_file_path, e)
+        return None
     pu.display_message("#3 ... File " + full_file_path + " generated!\n")
     return full_file_path
