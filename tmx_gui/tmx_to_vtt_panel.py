@@ -3,6 +3,7 @@ import tkinter
 
 import CONSTANTS
 from processors import tmx_processor
+from tmx_gui import help_handles
 from utilities import printing_utilities
 
 SELECTION_SINGLE_FILE = 'SINGLE_FILE'
@@ -42,32 +43,18 @@ class TmxToVttPanel:
                                " you want to extract form the .tmx file(s)" \
                                " and place into the resulting .vtt file(s)."
 
-        grid_label_configurations = {
-            'columnspan': 3,
-            'padx': 10,
-            'pady': 0,
-            'sticky': 'we'
-        }
-        self.label_help_single_file = Label(self.master,
-                                            text=label_help_text_single_file)
-        self.label_help_single_file.grid(row=row, column=column,
-                                         **grid_label_configurations)
-        qrf()
-        row += 1
-        self.label_help_multiple_files = \
-            Label(self.master,text=label_help_text_multiple_files)
-        self.label_help_multiple_files.grid(row=row, column=column,
-                                            **grid_label_configurations)
-        qrf()
-        row += 1
-        self.label_help_language = Label(self.master, text=label_help_text_lang)
-        self.label_help_language.grid(row=row, column=column,
-                                      **grid_label_configurations)
-        qrf()
+        # -- Configure menubar
+        menubar = tkinter.Menu(self.master)
+        menubar.add_command(
+            help_handles.get_help_menu_item(self.master,
+                                            [label_help_text_single_file,
+                                             label_help_text_multiple_files,
+                                             label_help_text_lang]
+                                            ))
+        self.master.config(menu=menubar)
 
         # -- Configure items for selecting single file
         # -- Radio
-        row += 1
         self.radio_single_file = Radiobutton(self.master,
                                              text='Single File',
                                              indicator=1,

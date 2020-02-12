@@ -3,11 +3,25 @@ import tkinter
 
 import CONSTANTS
 from processors import tmx_processor
+from tmx_gui import help_handles
+from tmx_gui.help_handles import HelpDialog
 from utilities import printing_utilities
 
 SELECTION_SINGLE_FILE = 'SINGLE_FILE'
 SELECTION_MULTIPLE_FILES = 'MULTIPLE_FILES'
 
+
+"""
+        column += 1
+        self.help_button = HelpButton(self.master,
+                                      [label_help_text_single_pair,
+                                       label_help_text_multiple_files,
+                                       label_help_text_source_language,
+                                       label_help_text_translation_language])
+        self.help_button.grid(row=row, column=column,
+                              **grid_configurations, sticky='we')
+        qrf()
+"""
 
 class SrtToTmxPanel:
     def __init__(self, master):
@@ -57,46 +71,19 @@ class SrtToTmxPanel:
                                                "The abbreviation of the " \
                                                "language of the translation " \
                                                "file."
-        grid_label_configurations = {
-            'columnspan': 3,
-            'padx': 10,
-            'pady': 0,
-            'sticky': 'we'
-        }
-        label_text_configuration = {
-            'justify': tkinter.LEFT,
-            'wraplength': CONSTANTS.WINDOW_WIDTH + 200
-        }
-        self.label_help_single_file = Label(self.master,
-                                            text=label_help_text_single_pair,
-                                            **label_text_configuration)
-        self.label_help_single_file.grid(row=row, column=column,
-                                         **grid_label_configurations)
-        qrf()
-        row += 1
-        self.label_help_multiple_files = \
-            Label(self.master, text=label_help_text_multiple_files,
-                  **label_text_configuration)
-        self.label_help_multiple_files.grid(row=row, column=column,
-                                            **grid_label_configurations)
-        qrf()
-        row += 1
-        self.label_help_source_language = \
-            Label(self.master, text=label_help_text_source_language,
-                  **label_text_configuration)
-        self.label_help_source_language.grid(row=row, column=column,
-                                             **grid_label_configurations)
-        qrf()
-        row += 1
-        self.label_help_translation_language = \
-            Label(self.master, text=label_help_text_translation_language,
-                  **label_text_configuration)
-        self.label_help_translation_language.grid(row=row, column=column,
-                                                  **grid_label_configurations)
+        # -- Configure menubar
+        menubar = tkinter.Menu(self.master)
+        menubar.add_command(
+            help_handles.get_help_menu_item(self.master,
+                                            [label_help_text_single_pair,
+                                             label_help_text_multiple_files,
+                                             label_help_text_source_language,
+                                             label_help_text_translation_language]
+                                            ))
+        self.master.config(menu=menubar)
 
         # -- Configure items for selecting single file
         # -- Radio
-        row += 1
         self.radio_single_file = Radiobutton(self.master,
                                              text='Single File',
                                              indicator=1,
@@ -121,7 +108,7 @@ class SrtToTmxPanel:
                            text="Browse",
                            command=self.browse_button_file_clicked)
         self.button_browse_single_file.grid(row=row, column=column,
-                                            **grid_configurations)
+                                            **grid_configurations, sticky='we')
         qrf()
 
         # -- Configure items for selecting directory
@@ -155,7 +142,8 @@ class SrtToTmxPanel:
                            command=self.browse_button_directory_clicked,
                            state=tkinter.DISABLED)
         self.button_browse_multiple_files.grid(row=row, column=column,
-                                               **grid_configurations)
+                                               **grid_configurations,
+                                               sticky='we')
         qrf()
 
         # -- Configure selection of target language
