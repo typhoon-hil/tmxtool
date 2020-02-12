@@ -22,13 +22,13 @@ def run_error(err_code, err_content=None, exception=None):
     if err_code == ERR_CODE_NON_EXISTING_DIRECTORY:
         pu.display_message(
             'Error: The directory you provided was not found ['
-            + err_content + ']. Script exited.',
+            + err_content + ']',
             where_to_print=CONSTANTS.PRINT_MESSAGEBOX | CONSTANTS.PRINT_CONSOLE)
         exit(ERR_CODE_NON_EXISTING_DIRECTORY)
     if err_code == ERR_CODE_NON_EXISTING_FILE:
         pu.display_message(
             'Error: The file you provided was not found [' + err_content +
-            ']. Script exited.',
+            '].',
             where_to_print=CONSTANTS.PRINT_MESSAGEBOX | CONSTANTS.PRINT_CONSOLE)
         exit(ERR_CODE_NON_EXISTING_FILE)
     if err_code == ERR_CODE_CREATING_XML:
