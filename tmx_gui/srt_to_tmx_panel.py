@@ -39,10 +39,6 @@ class SrtToTmxPanel:
         self.string_var_target_language = tkinter.StringVar(self.master,
                                                             value="de")
 
-        def quick_row_config():
-            self.master.grid_rowconfigure(row, weight=2)
-        qrf = quick_row_config
-
         # -- Configure items for labeling and showing help
         row = 0
         column = 0
@@ -91,7 +87,6 @@ class SrtToTmxPanel:
                                   command=self.close)
         self.button_exit.grid(row=row, column=column, **grid_configurations,
                               sticky='we')
-        qrf()
         column += 1
         self.button_generate = Button(self.master,
                                       text="Generate .tmx",
@@ -99,7 +94,9 @@ class SrtToTmxPanel:
         self.button_generate.grid(row=row, column=column,
                                   columnspan=2, **grid_configurations,
                                   sticky='we')
-        qrf()
+
+        for idx in range(row):
+            self.master.grid_rowconfigure(idx, weight=2)
 
         # -- Set modal and grab focus
         self.master.focus_set()
