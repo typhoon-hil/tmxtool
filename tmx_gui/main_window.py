@@ -1,6 +1,5 @@
 from tkinter import Tk, Button, Frame, messagebox
 
-import CONSTANTS
 import CONSTANTS as const
 from tmx_gui.srt_to_tmx_dialog import SrtToTmxDialog
 from tmx_gui.tmx_to_vtt_dialog import TmxToVttDialog
@@ -14,7 +13,7 @@ class MainWindow(Frame):
         super().__init__(master, *args, **kwargs)
         self.master = master
         # -- Shorthand for grid configurations - add to all grid configs
-        gc = CONSTANTS.GRID_CONFIGURATIONS.copy()
+        gc = const.GRID_CONFIGURATIONS.copy()
         gc.update({'sticky': 'we'})
 
         master.title("Linguist Support")
@@ -82,7 +81,7 @@ class MainWindow(Frame):
                                 "detailed information about the problem.")
 
 
-if __name__ == '__main__':
+def run_main_app():
     root = Tk()
     root.geometry(str(const.WINDOW_WIDTH) + "x" + str(const.WINDOW_HEIGHT))
     my_gui = MainWindow(root, width=400)

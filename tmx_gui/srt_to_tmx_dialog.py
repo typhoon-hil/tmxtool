@@ -63,6 +63,8 @@ class SrtToTmxDialog:
                                               title="Select .srt File",
                                               filetype=(("srt files", "*.srt"),
                                                         ("all files", "*.*")))
+        if filename is None or len(filename) == 0:
+            return
         self.string_var_single_pair_source_location.set(filename)
 
     def _command_browse_single_file_translation(self):
@@ -75,6 +77,8 @@ class SrtToTmxDialog:
                                               title="Select .srt File",
                                               filetype=(("srt files", "*.srt"),
                                                         ("all files", "*.*")))
+        if filename is None or len(filename) == 0:
+            return
         self.string_var_single_pair_translation_location.set(filename)
 
     def _command_browse_directory(self):
@@ -84,6 +88,8 @@ class SrtToTmxDialog:
         """
         dir_name = filedialog.askdirectory(initialdir="/",
                                            title="Select a directory")
+        if dir_name is None or len(dir_name) == 0:
+            return
         self.string_var_directory_location.set(dir_name)
 
     def _radio_selection(self):

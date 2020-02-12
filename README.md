@@ -5,6 +5,17 @@ The TMX Tool is a script used for executing operations related to *.tmx* files.
 These instructions are update each time there is a new version of the tool/new 
 commands added to the tool.
 
+#### - 12. FEB. 2020.
+Tmx tool got it's own Graphical User Interface. 
+
+The gui has a help menu in each panel that does something, 
+so no help will be posted on this README. 
+Opening the 'About' panel in the GUI will show the address and
+ what to do if there are any errors, and how to support the project.
+
+The gui can be ran using the 
+
+#### - Long ago ..
 All the available commands are listed below with examples:
 
 *  **-help**

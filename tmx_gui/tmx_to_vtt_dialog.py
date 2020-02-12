@@ -20,6 +20,7 @@ class TmxToVttDialog:
     """
     def __init__(self, master):
         self.master = self.top = tkinter.Toplevel(master)
+        self.master.geometry("600x100")
         grid_configurations = CONSTANTS.GRID_CONFIGURATIONS
         self.row = 0
         self.column = 0
@@ -91,6 +92,8 @@ class TmxToVttDialog:
         """
         dir_name = filedialog.askdirectory(initialdir="/",
                                            title="Select a directory")
+        if dir_name is None or len(dir_name) == 0:
+            return
         self.string_var_multiple_files.set(dir_name)
 
     def _browse_button_file_clicked(self):
@@ -101,6 +104,8 @@ class TmxToVttDialog:
                                               title="Select .tmx File",
                                               filetype=(("tmx files", "*.tmx"),
                                                         ("all files", "*.*")))
+        if filename is None or len(filename) == 0:
+            return
         self.string_var_single_file.set(filename)
 
     def _make_help_menu(self):

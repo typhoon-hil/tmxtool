@@ -82,7 +82,7 @@ def run_warning(warn_code, warn_content, exception=None):
         pu.display_message('|---Timestamp: [' + warn_content[1] + ']')
         pu.display_message('|---Content: [' + warn_content[2] + ']')
         pu.display_message('Continuing file conversion ...')
-        _warning_buffer += '\nWarning: invalid content format found:\n'
+        _warning_buffer += '\n\nWarning: invalid content format found:\n'
         _warning_buffer += '|---ID: [' + warn_content[0] + ']\n'
         _warning_buffer += '|---Timestamp: [' + warn_content[1] + ']\n'
         _warning_buffer += '|---Content: [' + warn_content[2] + ']\n'
@@ -92,12 +92,12 @@ def run_warning(warn_code, warn_content, exception=None):
         pu.display_message('The file [' + warn_content + '] you specified '
                                                          'is not a valid .tmx'
                                                          ' file.')
-        _warning_buffer += '\nWarning: invalid tmx file.\n'
+        _warning_buffer += '\n\nWarning: invalid tmx file.\n'
         _warning_buffer += 'The file [' + warn_content + '] you specified '\
                                                  'is not a valid .tmx'\
                                                  ' file.'
         return WARNING_CODE_INVALID_FORMAT
     if warn_code == WARNING_CODE_NO_PAIR_FOUND:
         pu.display_message('Warning: no pair found for [' + warn_content + ']')
-        _warning_buffer += '\nWarning: no pair found for [' + warn_content + ']'
+        _warning_buffer += '\n\nWarning: no pair found for [' + warn_content + ']'
         return WARNING_CODE_NO_PAIR_FOUND
