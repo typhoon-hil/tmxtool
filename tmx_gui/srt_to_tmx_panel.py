@@ -3,6 +3,7 @@ import tkinter
 
 import CONSTANTS
 from processors import tmx_processor
+from processors.srt_processor import process_srt
 from tmx_gui import help_handles
 from tmx_gui.help_handles import HelpDialog
 from utilities import printing_utilities
@@ -418,4 +419,12 @@ class SrtToTmxPanel:
             source_lang = self.string_var_source_language.get()
             arguments = [path, source_lang]
 
+        ret = process_srt(arguments)
+        if type(ret) is str:
+            text = "Results stored in: " + ret
+        else:
+            text = "Results stored in: \n"
+            for item in ret:
+                text += item + "\n"
 
+        messagebox.showinfo('Generation Complete', text)
