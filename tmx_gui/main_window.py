@@ -7,6 +7,9 @@ from tmx_gui.tmx_to_vtt_panel import TmxToVttPanel
 
 
 class MainWindow(Frame):
+    """
+    Main window of the application. Duh
+    """
     def __init__(self, master, *args, **kwargs):
         super().__init__(master, *args, **kwargs)
         self.master = master
@@ -52,6 +55,9 @@ class MainWindow(Frame):
         self.master.grid_rowconfigure(row, weight=2)
 
     def open_window(self, window_flag):
+        """
+        Opens windows based on button selection. All buttons call this function.
+        """
         if window_flag == const.WINDOW_GENERATE_TMX:
             dialog = SrtToTmxPanel(self.master)
             self.master.wait_window(dialog.top)
@@ -76,11 +82,8 @@ class MainWindow(Frame):
                                 "detailed information about the problem.")
 
 
-
 if __name__ == '__main__':
     root = Tk()
     root.geometry(str(const.WINDOW_WIDTH) + "x" + str(const.WINDOW_HEIGHT))
-
     my_gui = MainWindow(root, width=400)
-
     root.mainloop()
