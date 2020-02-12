@@ -11,6 +11,13 @@ SELECTION_MULTIPLE_FILES = 'MULTIPLE_FILES'
 
 
 class TmxToVttDialog:
+    """
+    Dialog for all operations having to do with converting tmx files to .vtt
+    files.
+
+    Arguments:
+        master: The component that spawned this dialog
+    """
     def __init__(self, master):
         self.master = self.top = tkinter.Toplevel(master)
         grid_configurations = CONSTANTS.GRID_CONFIGURATIONS
@@ -33,10 +40,16 @@ class TmxToVttDialog:
         self.master.grab_set()
 
     def _close(self):
+        """
+        Closes the dialog.
+        """
         self.master.grab_release()
         self.master.destroy()
 
     def _generate_vtt(self):
+        """
+        Calls the procedure to generate a .vtt file from the supplied arguments.
+        """
         selection = self.string_var_selected_radio.get()
         if selection == SELECTION_MULTIPLE_FILES:
             path = self.string_var_multiple_files.get()
@@ -55,6 +68,10 @@ class TmxToVttDialog:
         messagebox.showinfo('Complete', text)
 
     def _radio_selection(self):
+        """
+        Switches the state of components based on the selection of
+        radio buttons.
+        """
         selection = self.string_var_selected_radio.get()
 
         if selection == SELECTION_MULTIPLE_FILES:
@@ -69,11 +86,17 @@ class TmxToVttDialog:
             self.textbox_single_file.configure(state=tkinter.NORMAL)
 
     def _browse_button_directory_clicked(self):
+        """
+        Opens the dialog to select the directory where .tmx files are located.
+        """
         dir_name = filedialog.askdirectory(initialdir="/",
                                            title="Select a directory")
         self.string_var_multiple_files.set(dir_name)
 
     def _browse_button_file_clicked(self):
+        """
+        Opens the dialog to browse for a .tmx file to convert to a .vtt file.
+        """
         filename = filedialog.askopenfilename(initialdir="/",
                                               title="Select .tmx File",
                                               filetype=(("tmx files", "*.tmx"),
@@ -81,6 +104,9 @@ class TmxToVttDialog:
         self.string_var_single_file.set(filename)
 
     def _make_help_menu(self):
+        """
+        Creates the help menu.
+        """
         label_help_text_single_file = "Single File: Choose from which " \
                                       "specific .tmx file you want " \
                                       "to create a .vtt."
@@ -102,6 +128,9 @@ class TmxToVttDialog:
         self.master.config(menu=menubar)
 
     def _make_string_vars(self):
+        """
+        Makes all tkinter StringVar-s.
+        """
         # -- Configure string vars items
         self.string_var_selected_radio = tkinter.StringVar()
         self.string_var_selected_radio.set(SELECTION_SINGLE_FILE)
@@ -116,6 +145,9 @@ class TmxToVttDialog:
         self.string_var_selected_radio.set(SELECTION_SINGLE_FILE)
 
     def _make_single_file_panel(self):
+        """
+        Creates the panel with components for selecting a single .tmx file.
+        """
         grid_configurations = CONSTANTS.GRID_CONFIGURATIONS
         # -- Radio for single file pair
         self.radio_single_file = Radiobutton(self.master,
@@ -145,6 +177,10 @@ class TmxToVttDialog:
                                             **grid_configurations)
 
     def _make_directory_panel(self):
+        """
+        Creates the panel with components for selecting a directory where .tmx
+        files are located.
+        """
         grid_configurations = CONSTANTS.GRID_CONFIGURATIONS
         # -- Configure items for selecting directory
         # -- Radio
@@ -182,6 +218,10 @@ class TmxToVttDialog:
                                                **grid_configurations)
 
     def _make_language_selection_panel(self):
+        """
+        Creates a panel with components for selecting the language that needs
+        to be extracted outta the .tmx file(s).
+        """
         grid_configurations = CONSTANTS.GRID_CONFIGURATIONS
         # -- Configure selection of target language
         self.row += 1
@@ -197,6 +237,9 @@ class TmxToVttDialog:
                                         **grid_configurations, columnspan=2)
 
     def _make_exit_and_generate_buttons(self):
+        """
+        Creates the bottom panel with back and generate buttons.
+        """
         grid_configurations = CONSTANTS.GRID_CONFIGURATIONS
         #  -- Configure items for generating based on selection and exiting
         # -- Configure generate action
