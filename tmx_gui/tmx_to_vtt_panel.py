@@ -185,9 +185,9 @@ class TmxToVttPanel:
             self.textbox_single_file.configure(state=tkinter.NORMAL)
 
     def _browse_button_directory_clicked(self):
-        dirname = filedialog.askdirectory(initialdir="/",
-                                          title="Select a directory")
-        self.string_var_multiple_files.set(dirname)
+        dir_name = filedialog.askdirectory(initialdir="/",
+                                           title="Select a directory")
+        self.string_var_multiple_files.set(dir_name)
 
     def _browse_button_file_clicked(self):
         filename = filedialog.askopenfilename(initialdir="/",
