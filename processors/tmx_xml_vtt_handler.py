@@ -15,7 +15,7 @@ def _format_time(time_string):
     Returns:
         The same as the time_string but with commas turned into full stops.
     """
-    # patter: don't care if it has a dot or comma, just split all numbers
+    # pattern: don't care if it has a dot or comma, just split all numbers
     # universally, then connect them with dots
     number_pattern = "([0-9]{2}:[0-9]{2}:[0-9]{2})[,.]([0-9]{3})"
     number_pattern += ' --> ' + number_pattern
