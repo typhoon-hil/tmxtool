@@ -6,8 +6,7 @@ from processors import tmx_processor
 from processors.srt_processor import process_srt
 from tmx_gui import help_handles
 from tmx_gui.help_handles import HelpDialog
-from utilities import printing_utilities
-
+from utilities import printing_utilities, error_manager
 
 SELECTION_SINGLE_FILE_PAIR = "SINGLE_PAIR"
 SELECTION_DIRECTORY = 'DIRECTORY'
@@ -419,12 +418,18 @@ class SrtToTmxPanel:
             source_lang = self.string_var_source_language.get()
             arguments = [path, source_lang]
 
+        error_manager.clean_warning_buffer()
         ret = process_srt(arguments)
+        warnings = error_manager.fetch_warning_buffer()
+
         if type(ret) is str:
             text = "Results stored in: " + ret
         else:
             text = "Results stored in: \n"
             for item in ret:
                 text += item + "\n"
+        if len(warnings) != 0:
+            text += "\nWarnings encountered: \n"
+            text += warnings
 
         messagebox.showinfo('Generation Complete', text)

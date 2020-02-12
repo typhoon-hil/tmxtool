@@ -7,6 +7,19 @@ from CONSTANTS import ERR_CODE_NON_EXISTING_DIRECTORY, \
     WARNING_NOT_A_TMX_FILE
 
 
+_warning_buffer = ""
+
+
+def clean_warning_buffer():
+    global _warning_buffer
+    _warning_buffer = ""
+
+
+def fetch_warning_buffer():
+    global _warning_buffer
+    return _warning_buffer
+
+
 def run_error(err_code, err_content=None, exception=None):
     """
     Prints an error for the user and exists out of the program
@@ -62,19 +75,29 @@ def run_warning(warn_code, warn_content, exception=None):
         warn_content: Custom content to show the user.
         exception: Exception to show to the user.
     """
+    global _warning_buffer
     if warn_code == WARNING_CODE_INVALID_FORMAT:
         pu.display_message('Warning: invalid content format found:')
         pu.display_message('|---ID: [' + warn_content[0] + ']')
         pu.display_message('|---Timestamp: [' + warn_content[1] + ']')
         pu.display_message('|---Content: [' + warn_content[2] + ']')
         pu.display_message('Continuing file conversion ...')
+        _warning_buffer += '\nWarning: invalid content format found:\n'
+        _warning_buffer += '|---ID: [' + warn_content[0] + ']\n'
+        _warning_buffer += '|---Timestamp: [' + warn_content[1] + ']\n'
+        _warning_buffer += '|---Content: [' + warn_content[2] + ']\n'
         return WARNING_CODE_INVALID_FORMAT
     if warn_code == WARNING_NOT_A_TMX_FILE:
         pu.display_message('Warning: invalid tmx file.')
         pu.display_message('The file [' + warn_content + '] you specified '
                                                          'is not a valid .tmx'
                                                          ' file.')
+        _warning_buffer += '\nWarning: invalid tmx file.\n'
+        _warning_buffer += 'The file [' + warn_content + '] you specified '\
+                                                 'is not a valid .tmx'\
+                                                 ' file.'
         return WARNING_CODE_INVALID_FORMAT
     if warn_code == WARNING_CODE_NO_PAIR_FOUND:
         pu.display_message('Warning: no pair found for [' + warn_content + ']')
+        _warning_buffer += '\nWarning: no pair found for [' + warn_content + ']'
         return WARNING_CODE_NO_PAIR_FOUND
