@@ -5,6 +5,8 @@ The TMX Tool is a script used for executing operations related to *.tmx* files.
 These instructions are update each time there is a new version of the tool/new 
 commands added to the tool.
 
+---
+
 #### - 12. FEB. 2020.
 Tmx tool got it's own Graphical User Interface. 
 
@@ -18,6 +20,7 @@ or the file simply does not run, call your local IT or software colleagues and a
 
 If all else fails, send a mail to milan.djurisic@typhoon-hil.com and ask for help.
 
+---
 #### - Long ago ..
 All the available commands are listed below with examples:
 
