@@ -1,6 +1,6 @@
-import tkinter
-from tkinter import Tk, Label, Button, Frame
+from tkinter import Tk, Button, Frame
 
+import CONSTANTS
 import CONSTANTS as const
 from tmx_gui.srt_to_tmx_panel import SrtToTmxPanel
 from tmx_gui.tmx_to_vtt_panel import TmxToVttPanel
@@ -11,11 +11,8 @@ class MainWindow(Frame):
         super().__init__(master, *args, **kwargs)
         self.master = master
         # -- Shorthand for grid configurations - add to all grid configs
-        gc = {
-            'padx': 25,
-            'pady': 10,
-            'sticky': 'we'
-        }
+        gc = CONSTANTS.GRID_CONFIGURATIONS.copy()
+        gc.update({'sticky': 'we'})
 
         master.title("Linguist Support")
 
@@ -65,7 +62,7 @@ class MainWindow(Frame):
 
 if __name__ == '__main__':
     root = Tk()
-    root.geometry("300x280")
+    root.geometry(str(const.WINDOW_WIDTH) + "x" + str(const.WINDOW_HEIGHT))
 
     my_gui = MainWindow(root, width=400)
 

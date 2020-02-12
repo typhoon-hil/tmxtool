@@ -14,8 +14,7 @@ class SrtToTmxPanel:
         self.master = self.top = tkinter.Toplevel(master)
 
         # -- Setup some decorations
-        grid_configurations = {'padx': 5,
-                               'pady': 5, }
+        grid_configurations = CONSTANTS.GRID_CONFIGURATIONS
 
         # -- Configure invisible items
         self.string_var_selected_radio = tkinter.StringVar()
@@ -64,26 +63,34 @@ class SrtToTmxPanel:
             'pady': 0,
             'sticky': 'we'
         }
+        label_text_configuration = {
+            'justify': tkinter.LEFT,
+            'wraplength': CONSTANTS.WINDOW_WIDTH + 200
+        }
         self.label_help_single_file = Label(self.master,
-                                            text=label_help_text_single_pair)
+                                            text=label_help_text_single_pair,
+                                            **label_text_configuration)
         self.label_help_single_file.grid(row=row, column=column,
                                          **grid_label_configurations)
         qrf()
         row += 1
         self.label_help_multiple_files = \
-            Label(self.master, text=label_help_text_multiple_files)
+            Label(self.master, text=label_help_text_multiple_files,
+                  **label_text_configuration)
         self.label_help_multiple_files.grid(row=row, column=column,
                                             **grid_label_configurations)
         qrf()
         row += 1
         self.label_help_source_language = \
-            Label(self.master, text=label_help_text_source_language)
+            Label(self.master, text=label_help_text_source_language,
+                  **label_text_configuration)
         self.label_help_source_language.grid(row=row, column=column,
                                              **grid_label_configurations)
         qrf()
         row += 1
         self.label_help_translation_language = \
-            Label(self.master, text=label_help_text_translation_language)
+            Label(self.master, text=label_help_text_translation_language,
+                  **label_text_configuration)
         self.label_help_translation_language.grid(row=row, column=column,
                                                   **grid_label_configurations)
 

@@ -14,8 +14,7 @@ class TmxToVttPanel:
         self.master = self.top = tkinter.Toplevel(master)
 
         # -- Setup some decorations
-        grid_configurations = {'padx': 5,
-                               'pady': 5, }
+        grid_configurations = CONSTANTS.GRID_CONFIGURATIONS
 
         # -- Configure invisible items
         self.string_var_selected_radio = tkinter.StringVar()
