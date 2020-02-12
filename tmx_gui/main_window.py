@@ -69,7 +69,11 @@ class MainWindow(Frame):
                                 "in the help menus in each panel.\n\n"
                                 "Support the project by sending me insulin and"
                                 " 'accu-check instant' tracks for checking"
-                                " blood sugar levels.")
+                                " blood sugar levels.\n\nAny and messages"
+                                " concerning any problems found within the "
+                                "application can be sent to "
+                                "milan.djurisic@typhoon-hil.com, with "
+                                "detailed information about the problem.")
 
 
 
