@@ -25,9 +25,8 @@ def display_message(*messages, where_to_print=constants.PRINT_CONSOLE,
         text += message
 
     if where_to_print & constants.PRINT_CONSOLE == constants.PRINT_CONSOLE:
-        if constants.SUPPRESS_CONSOLE_PRINT:
-            return
-        print(text)
+        if not constants.SUPPRESS_CONSOLE_PRINT:
+            print(text)
 
     if where_to_print & constants.PRINT_MESSAGEBOX == \
             constants.PRINT_MESSAGEBOX:
