@@ -26,10 +26,10 @@ class SrtToTmxPanel:
             StringVar(self.master, value='Path to directory ...')
         self.string_var_target_language = tkinter.StringVar(self.master,
                                                             value="de")
-
-        # -- Configure items for labeling and showing help
         row = 0
         column = 0
+
+        # -- Configure items for labeling and showing help
         label_help_text_single_pair = "Single Pair: Enter the path to a pair" \
                                       " of .srt files (source language file" \
                                       " and translation language file) that" \
@@ -82,6 +82,19 @@ class SrtToTmxPanel:
                                              command=self._radio_selection)
         self.radio_single_pair.grid(row=row, column=column, sticky=tkinter.W,
                                     **grid_configurations)
+
+        # Radio button for directory selection
+        row+=1
+        self.radio_single_pair = Radiobutton(self.master,
+                                             text='Multiple Files',
+                                             indicator=1,
+                                             value=SELECTION_DIRECTORY,
+                                             variable=self.
+                                             string_var_selected_radio,
+                                             command=self._radio_selection)
+        self.radio_single_pair.grid(row=row, column=column, sticky=tkinter.W,
+                                    **grid_configurations)
+
 
         # -- Configure exit button
         row += 1
