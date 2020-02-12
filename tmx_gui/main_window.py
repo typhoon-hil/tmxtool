@@ -2,8 +2,8 @@ from tkinter import Tk, Button, Frame, messagebox
 
 import CONSTANTS
 import CONSTANTS as const
-from tmx_gui.srt_to_tmx_panel import SrtToTmxPanel
-from tmx_gui.tmx_to_vtt_panel import TmxToVttPanel
+from tmx_gui.srt_to_tmx_dialog import SrtToTmxDialog
+from tmx_gui.tmx_to_vtt_dialog import TmxToVttDialog
 
 
 class MainWindow(Frame):
@@ -59,10 +59,10 @@ class MainWindow(Frame):
         Opens windows based on button selection. All buttons call this function.
         """
         if window_flag == const.WINDOW_GENERATE_TMX:
-            dialog = SrtToTmxPanel(self.master)
+            dialog = SrtToTmxDialog(self.master)
             self.master.wait_window(dialog.top)
         elif window_flag == const.WINDOW_GENERATE_VTT:
-            dialog = TmxToVttPanel(self.master)
+            dialog = TmxToVttDialog(self.master)
             self.master.wait_window(dialog.top)
         elif window_flag == const.WINDOW_ABOUT:
             messagebox.showinfo("Typhoon HIL TMX Tool!",

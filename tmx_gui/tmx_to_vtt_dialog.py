@@ -10,7 +10,7 @@ SELECTION_SINGLE_FILE = 'SINGLE_FILE'
 SELECTION_MULTIPLE_FILES = 'MULTIPLE_FILES'
 
 
-class TmxToVttPanel:
+class TmxToVttDialog:
     def __init__(self, master):
         self.master = self.top = tkinter.Toplevel(master)
         grid_configurations = CONSTANTS.GRID_CONFIGURATIONS

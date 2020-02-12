@@ -12,7 +12,14 @@ SELECTION_SINGLE_FILE_PAIR = "SINGLE_PAIR"
 SELECTION_DIRECTORY = 'DIRECTORY'
 
 
-class SrtToTmxPanel:
+class SrtToTmxDialog:
+    """
+    Modal dialog made for all operations that have to do with converting .srt files
+    to .tmx files.
+
+    Arguments:
+        master: The component that made this panel
+    """
     def __init__(self, master):
         self.master = self.top = tkinter.Toplevel(master)
         self.master.geometry("680x400")
@@ -47,6 +54,11 @@ class SrtToTmxPanel:
             child.configure(state=tkinter.DISABLED)
 
     def _command_browse_single_file_source(self):
+        """
+        Command for opening a dialog to browse for a single file that will be
+        used in the process of converting .srt to .tmx. This file will act as
+        the source language file.
+        """
         filename = filedialog.askopenfilename(initialdir="/",
                                               title="Select .srt File",
                                               filetype=(("srt files", "*.srt"),
@@ -54,6 +66,11 @@ class SrtToTmxPanel:
         self.string_var_single_pair_source_location.set(filename)
 
     def _command_browse_single_file_translation(self):
+        """
+        Command for opening a dialog to browse for a single file that will be
+        used in the process of converting .srt to .tmx. This file will act as
+        the translation language file.
+        """
         filename = filedialog.askopenfilename(initialdir="/",
                                               title="Select .srt File",
                                               filetype=(("srt files", "*.srt"),
@@ -61,14 +78,29 @@ class SrtToTmxPanel:
         self.string_var_single_pair_translation_location.set(filename)
 
     def _command_browse_directory(self):
+        """
+        Command for opening a dialog to browse for a directory where a bunch
+        of .srt file pairs are located.
+        """
         dir_name = filedialog.askdirectory(initialdir="/",
                                            title="Select a directory")
         self.string_var_directory_location.set(dir_name)
 
     def _radio_selection(self):
+        """
+        Command for switching component states based on the selected
+        radio button.
+        """
         selection = self.string_var_selected_radio.get()
 
         def _enable_disable_frame(target_frame, state):
+            """
+            Function changes all target frame components states to the
+            selected state.
+            Arguments:
+                target_frame: frame where components are located
+                state: new state of components in frame
+            """
             for child in target_frame.winfo_children():
                 child.configure(state=state)
 
@@ -82,6 +114,10 @@ class SrtToTmxPanel:
             self.entry_translation_language.configure(state=tkinter.DISABLED)
 
     def _make_single_pair_frame(self):
+        """
+        Creates everything needed for the frame that holds all components
+        that have to do with selecting a single pair of .srt files
+        """
         grid_configurations = CONSTANTS.GRID_CONFIGURATIONS
         # Radio button for single file pair
         self.radio_single_pair = Radiobutton(self.master,
@@ -190,6 +226,10 @@ class SrtToTmxPanel:
         self.frame_single_pair.grid_columnconfigure(1, weight=2)
 
     def _make_directory_frame(self):
+        """
+        Creates every component that has to do with selecting a directory
+        where .srt pairs are stored.
+        """
         grid_configurations = CONSTANTS.GRID_CONFIGURATIONS
         inner_grid_configurations = {
             'padx': 3,
@@ -269,6 +309,9 @@ class SrtToTmxPanel:
         self.frame_directory.grid_columnconfigure(1, weight=2)
 
     def _make_menu_bar(self):
+        """
+        Creates the help menu bar.
+        """
         # -- Configure items for labeling and showing help
         label_help_text_single_pair = "Single Pair: Enter the path to a pair" \
                                       " of .srt files (source language file" \
@@ -309,6 +352,9 @@ class SrtToTmxPanel:
         self.master.config(menu=menubar)
 
     def _make_generate_and_exit_buttons(self):
+        """
+        Creates the bottom panel buttons, Back and Generate
+        """
         grid_configurations = CONSTANTS.GRID_CONFIGURATIONS
         # -- Configure exit button
         self.row += 1
@@ -334,6 +380,10 @@ class SrtToTmxPanel:
         )
 
     def _make_source_and_translation_language_controls(self):
+        """
+        Creates all components that have to do with selecting the languages
+        of the source file and the translation file.
+        """
         grid_configurations = CONSTANTS.GRID_CONFIGURATIONS
         self.row += 1
         self.column = 0
@@ -400,10 +450,16 @@ class SrtToTmxPanel:
         self.frame_languages.grid_columnconfigure(1, weight=2)
 
     def close(self):
+        """
+        Closes the dialog and returns focus to parent dialog.
+        """
         self.master.grab_release()
         self.master.destroy()
 
     def _generate_tmx(self):
+        """
+        Calls existing generate tmx procedure.
+        """
         selection = self.string_var_selected_radio.get()
         arguments = []
 
