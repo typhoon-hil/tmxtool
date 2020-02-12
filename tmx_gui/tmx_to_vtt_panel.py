@@ -4,7 +4,7 @@ import tkinter
 import CONSTANTS
 from processors import tmx_processor
 from tmx_gui import help_handles
-from utilities import printing_utilities
+from utilities import printing_utilities, error_manager
 
 SELECTION_SINGLE_FILE = 'SINGLE_FILE'
 SELECTION_MULTIPLE_FILES = 'MULTIPLE_FILES'
@@ -55,7 +55,8 @@ class TmxToVttPanel:
         self.master.config(menu=menubar)
 
         # -- Configure items for selecting single file
-        self.string_var_selected_radio = SELECTION_SINGLE_FILE
+        self.string_var_selected_radio = tkinter.StringVar()
+        self.string_var_selected_radio.set(SELECTION_SINGLE_FILE)
 
         # -- Radio for single file pair
         self.radio_single_file = Radiobutton(self.master,
@@ -167,11 +168,16 @@ class TmxToVttPanel:
         else:
             path = self.string_var_single_file.get()
         lang = self.string_var_target_language.get()
+
+        error_manager.clean_warning_buffer()
         path = tmx_processor.process_tmx_file((path, lang))
-        printing_utilities.display_message(
-            "Result saved to: [" + path + "]",
-            where_to_print=CONSTANTS.PRINT_MESSAGEBOX
-        )
+        warnings = error_manager.fetch_warning_buffer()
+
+        text = "Results saved to : [" + path + "]"
+        if len(warnings) != 0:
+            text += "Warnings encountered: \n"
+            text += warnings
+        messagebox.showinfo('Complete', text)
 
     def _radio_selection(self):
         selection = self.string_var_selected_radio.get()
